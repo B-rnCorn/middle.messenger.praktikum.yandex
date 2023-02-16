@@ -1,0 +1,15 @@
+@use './styles/variables/variables' as *;
+
+body{
+  margin: 0;
+
+  font-family: 'Inter', serif;
+  font-weight: $font-weight-default;
+  font-size: $font-size-default;
+  color: $text-color-default;
+}
+
+@import '../pages/chat/ui/chat';
+@import '../widgets/chat-list/ui/chat-list';
+@import '../entities/chat-list-item/ui/chat-list-item';
+@import '../widgets/chat-content/ui/chat-content';

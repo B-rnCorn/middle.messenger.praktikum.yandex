@@ -1,0 +1,40 @@
+.chat-list {
+
+  &__navigation-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+    height: 60px;
+
+    .profile-navigate {
+      display: flex;
+      flex-direction: row;
+
+      margin-top: 25px;
+      margin-bottom: 25px;
+      margin-right: 10px;
+
+      cursor: pointer;
+      svg {
+        width: 15px;
+        height: 17px;
+
+        fill: $text-color-default;
+      }
+    }
+  }
+
+  &__search {
+
+  }
+
+  &__items {
+    padding: 0;
+    border-top: $background-color-element 1px solid;
+    margin: 0;
+
+
+    list-style-type: none;
+  }
+}

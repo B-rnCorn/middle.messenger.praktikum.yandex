@@ -1,0 +1,17 @@
+<div class="chat-list-item">
+    <img class="chat-list-item__icon" alt="chat-img" src={{imageUrl}}>
+    <div class="chat-list-item__info">
+        <div class="chat-list-item__info info__name">
+             {{name}}
+        </div>
+        <div class="chat-list-item__info info__message">
+            {{lastMessage}}
+        </div>
+    </div>
+    <div class="chat-list-item__right-panel">
+        <div class="right-panel__time">{{lastMessageTime}}</div>
+        {{#if unreadMessageCount}}
+            <div class="right-panel__message-count">{{unreadMessageCount}}</div>
+        {{/if}}
+    </div>
+</div>
