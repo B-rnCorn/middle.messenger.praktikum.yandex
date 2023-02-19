@@ -1,4 +1,4 @@
-# Messenger ![status](https://img.shields.io/static/v1?label=status&message=InProgress&color=yellow) ![stable version](https://img.shields.io/static/v1?label=StableVerison&message=main&color=green) ![node version](https://img.shields.io/static/v1?label=node&message=v19.6.0&color=green)
+# Messenger ![status](https://img.shields.io/static/v1?label=status&message=InProgress&color=yellow) ![stable version](https://img.shields.io/static/v1?label=StableVerison&message=deploy&color=green) ![node version](https://img.shields.io/static/v1?label=node&message=v19.6.0&color=green)
 
 ## Описание
 
@@ -11,6 +11,8 @@
 [![node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en/)
 
 ### Запуск приложения
+
+Стабильная версия приложения находится в ветке deploy
 
 - `npm install` — установка стабильной версии,
 - `npm run dev` — запуск версии для разработчика,
