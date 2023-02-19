@@ -1,0 +1,20 @@
+.profile-info-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  margin-top: 10px;
+  border-bottom: 1px solid $background-color-element;
+  padding-bottom: 10px;
+
+  width: 100%;
+
+  font-size: $font-size-heading;
+  color: $theme-color-primary;
+
+  &:last-child {
+    border-bottom: none;
+
+    color: $text-color-error;
+  }
+}

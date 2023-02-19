@@ -29,3 +29,5 @@
 В качестве шаблонизатора выбран Handlebars (https://handlebarsjs.com/guide/#what-is-handlebars).
 
 Для написания стилей используется препроцессор Sass, используется синтаксис Scss (https://sass-lang.com/).
+
+В стилях используется подход ConcentricCSS (https://rhodesmill.org/brandon/2011/concentric-css/).

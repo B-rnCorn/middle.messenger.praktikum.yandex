@@ -1,7 +1,8 @@
 $background-color-primary: #FFFFFF;
 $background-color-accent: #E4EDFD;
 $background-color-element: #EFEFEF;
-$background-color-shadow: rgba(0,0,0,0.10);
+$background-color-element-light: #FBFBFB;
+$background-color-shadow: rgba(0,0,0,0.7);
 
 $theme-color-primary: #3369F3;
 $theme-color-disabled: #999999;
@@ -11,6 +12,8 @@ $font-weight-default: 500;
 $font-weight-bold: 600;
 
 $font-size-small: 9px;
+$font-size-input-validation-text: 8px;
+$font-size-alternative-navigation: 11px;
 $font-size-default: 12px;
 $font-size-heading: 13px;
 $font-size-page-error-number: 40px;

@@ -1,0 +1,9 @@
+<div class="input-field">
+    <label for="{{inputFieldId}}" class="input-field__label">{{inputFieldLabel}}</label>
+    <input id="{{inputFieldId}}" class="input-field__input input_theme_{{inputFieldStatus}}" type="{{inputFieldType}}" value="{{inputFieldValue}}">
+    <label class="input-field__validation-text">
+        {{#if (isError inputFieldStatus)}}
+            {{inputFieldErrorText}}
+        {{/if}}
+    </label>
+</div>

@@ -1,0 +1,43 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-top: 16px;
+
+  &__label {
+    margin-bottom: 8px;
+
+    font-size: $font-size-small;
+  }
+
+  &__input {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background: $background-color-primary;
+    padding-bottom: 7px;
+
+    width: 100%;
+
+    color: $text-color-accent;
+    font-size: $font-size-heading;
+
+    &:focus-visible {
+      outline: rgba(0,0,0,0);
+    }
+  }
+
+  .input_theme_error {
+    border-bottom: 1px solid $theme-color-error;
+  }
+
+  .input_theme_success {
+    border-bottom: 1px solid $theme-color-primary;
+  }
+
+  &__validation-text {
+    margin-top: 7px;
+    color: $text-color-error;
+    font-size: $font-size-input-validation-text;
+  }
+}

@@ -1,6 +1,6 @@
-import * as images from "../../../app/images/image-urls";
+import * as images from "../../app/images/image-urls";
 
-export const chatMock = {
+export const chatConfig = {
     chatListItems: [
         {
             imageUrl: images.chatImageUrl,

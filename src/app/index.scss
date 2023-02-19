@@ -13,3 +13,22 @@ body{
 @import '../widgets/chat-list/ui/chat-list';
 @import '../entities/chat-list-item/ui/chat-list-item';
 @import '../widgets/chat-content/ui/chat-content';
+
+@import '../pages/login/ui/login';
+@import '../widgets/login-form/ui/login-form';
+
+@import '../pages/registration/ui/registration';
+@import '../widgets/registration-form/ui/registration-form';
+
+@import '../pages/profile/ui/profile';
+@import '../entities/profile-info-item/ui/profile-info-item';
+@import '../entities/profile-info-action/ui/profile-info-action';
+@import '../features/navigate-back/ui/navigate-back';
+
+@import '../pages/error-not-found/error-not-found';
+@import '../pages/error-server/error-server';
+@import '../widgets/error-page-content/error-page-content';
+
+@import '../shared/card/card';
+@import '../shared/input/input';
+@import '../shared/button/button';
