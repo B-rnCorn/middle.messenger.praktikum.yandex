@@ -12,6 +12,8 @@
   font-size: $font-size-heading;
   color: $theme-color-primary;
 
+  cursor: pointer;
+
   &:last-child {
     border-bottom: none;
 

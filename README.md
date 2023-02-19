@@ -10,9 +10,17 @@
 
 [![node](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/en/)
 
+### Запуск приложения
+
 - `npm install` — установка стабильной версии,
 - `npm run dev` — запуск версии для разработчика,
 - `npm run build` — сборка стабильной версии.
+
+### Запуск сервера
+
+Статика раздается при помощи сервера express, запущенном на порте 3000
+
+- `npm run start` — запуск сервера.
 
 ##  Документация
 Ссылка на фигму:

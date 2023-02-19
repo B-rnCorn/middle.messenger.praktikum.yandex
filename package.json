@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "parcel ./index.html --no-cache",
     "build": "parcel build ./index.html --no-cache",
+    "start": "npm run build && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,6 +27,7 @@
     "sharp": "^0.31.3"
   },
   "dependencies": {
+    "express": "^4.18.2",
     "handlebars": "4.7.7"
   }
 }

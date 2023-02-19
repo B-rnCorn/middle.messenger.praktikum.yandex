@@ -38,6 +38,7 @@ export const profileConfig = {
         },
         {
             actionName: 'Выйти',
+            route: 'Login'
         }
     ]
 }
