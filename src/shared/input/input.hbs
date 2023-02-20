@@ -1,6 +1,17 @@
 <div class="input-field">
-    <label for="{{inputFieldId}}" class="input-field__label">{{inputFieldLabel}}</label>
-    <input id="{{inputFieldId}}" class="input-field__input input_theme_{{inputFieldStatus}}" type="{{inputFieldType}}" value="{{inputFieldValue}}">
+    {{#if inputFieldLabel}}
+        <label for="{{inputFieldId}}" class="input-field__label">
+            {{inputFieldLabel}}
+        </label>
+    {{/if}}
+    <input id="{{inputFieldId}}"
+           class="input-field__input input_theme_{{inputFieldStatus}}"
+           type="{{inputFieldType}}"
+            {{#if inputFieldValue}}
+                value="{{inputFieldValue}}"
+            {{/if}}
+           name="{{inputFieldName}}"
+    >
     <label class="input-field__validation-text">
         {{#if (isError inputFieldStatus)}}
             {{inputFieldErrorText}}

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "project work for course yandex praktikum",
   "scripts": {
-    "dev": "parcel ./index.html --no-cache",
+    "dev": "parcel ./index.html --no-cache --open",
     "build": "parcel build ./index.html --no-cache",
     "start": "npm run build && node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

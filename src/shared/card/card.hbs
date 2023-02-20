@@ -5,7 +5,9 @@
     <div class="card__content">
         {{> card-content body}}
     </div>
-    <div class="card__button">
-        {{> button button}}
-    </div>
+    {{#if button}}
+        <div class="card__button">
+            {{> button button}}
+        </div>
+    {{/if}}
 </div>

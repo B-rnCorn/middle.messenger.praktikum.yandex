@@ -5,6 +5,7 @@ export const loginConfig = {
             loginFormItems: [
                 {
                     inputFieldId: 'login',
+                    inputFieldName: 'login',
                     inputFieldLabel: 'Логин',
                     inputFieldStatus: 'success',
                     inputFieldValue: 'examplelogin',
@@ -12,19 +13,21 @@ export const loginConfig = {
                 },
                 {
                     inputFieldId: 'password',
+                    inputFieldName: 'password',
                     inputFieldLabel: 'Пароль',
                     inputFieldStatus: 'error',
                     inputFieldValue: 'qwe',
                     inputFieldType: 'password',
                     inputFieldErrorText: 'Длина должна быть более 6 символов'
                 }
-            ]
-        },
-        button: {
-            buttonText: 'Авторизоваться',
-            buttonAlternativeNavigationText: 'Нет аккаунта?',
-            buttonAlternativeNavigationRoute: 'Registration',
-            onClickAction: 'Chat'
+            ],
+            loginFormButton: {
+                buttonText: 'Авторизоваться',
+                buttonAlternativeNavigationText: 'Нет аккаунта?',
+                buttonAlternativeNavigationRoute: 'Registration',
+                onClickAction: 'Chat',
+                buttonType: 'submit'
+            },
         },
     }
 }

@@ -1,0 +1,18 @@
+<div class='profile-information'>
+    <div class="profile-information__avatar">
+        <img alt="chat-img" src={{imageUrl}}>
+    </div>
+    <h1 class="profile-information__name">
+        {{nameInChat}}
+    </h1>
+    <ul class="profile-information__info">
+        {{#each profileInfoItems}}
+            {{> profile-info-item}}
+        {{/each}}
+    </ul>
+    <ul class="profile-information__actions">
+        {{#each profileInfoActions}}
+            {{> profile-info-action}}
+        {{/each}}
+    </ul>
+</div>

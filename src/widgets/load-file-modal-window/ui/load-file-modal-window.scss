@@ -1,0 +1,12 @@
+.load-file-modal-window {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: $background-color-shadow;
+}

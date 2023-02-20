@@ -1,0 +1,13 @@
+<form class="profile-form" onsubmit="preventDefaultEvent(event)">
+    <div class="profile-form__avatar-wrapper">
+        <div class="profile-form__avatar">
+            <img alt="chat-img" src={{imageUrl}}>
+        </div>
+    </div>
+    {{#each profileFormItems}}
+        {{> input}}
+    {{/each}}
+    <div class="profile-form__button">
+        {{> button profileFormButton }}
+    </div>
+</form>

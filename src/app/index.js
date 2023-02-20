@@ -2,13 +2,19 @@ import { chatConfig } from '../pages/chat/config'
 import { loginConfig } from '../pages/login/config';
 import { registrationConfig } from '../pages/registration/config';
 import { profileConfig } from '../pages/profile/config';
+import { profileEditConfig} from '../pages/profile-edit/config';
 import { errorServerConfig } from '../pages/error-server/config';
 import { errorNotFoundConfig } from '../pages/error-not-found/config';
+import { loadFileModalConfig} from '../widgets/load-file-modal-window/config';
 
 import profile from '../pages/profile/ui/profile.hbs'
+import profileInformation from '../widgets/profile-information/ui/profile-information.hbs'
 import profileInfoItem from '../entities/profile-info-item/ui/profile-info-item.hbs'
 import profileInfoAction from '../entities/profile-info-action/ui/profile-info-action.hbs'
 import navigateBack from '../features/navigate-back/ui/navigate-back.hbs'
+
+import profileEdit from '../pages/profile-edit/ui/profile-edit.hbs'
+import profileInformationEditForm from '../widgets/profile-information-edit-form/ui/profile-information-edit-form.hbs'
 
 import chat from '../pages/chat/ui/chat.hbs'
 import chatList from '../widgets/chat-list/ui/chat-list.hbs'
@@ -25,6 +31,9 @@ import errorNotFound from '../pages/error-not-found/error-not-fount.hbs'
 import errorServer from '../pages/error-server/error-server.hbs'
 import errorPageContent from '../widgets/error-page-content/error-page-content.hbs'
 
+import loadFileModalWindow from '../widgets/load-file-modal-window/ui/load-file-modal-window.hbs'
+import loadFile from '../features/load-file/ui/load-file.hbs'
+
 import card from '../shared/card/card.hbs'
 import input from '../shared/input/input.hbs'
 import button from '../shared/button/button.hbs'
@@ -36,10 +45,12 @@ import * as Handlebars from "handlebars/dist/handlebars.runtime";
 const ROUTES = {
     Chat: chat,
     Profile: profile,
+    ProfileEdit: profileEdit,
     Login: login,
     Registration: registration,
     ErrorNotFound: errorNotFound,
     ErrorServer: errorServer,
+    LoadFileModalWindow: loadFileModalWindow,
 }
 
 const PARTIALS = {
@@ -47,8 +58,10 @@ const PARTIALS = {
     Login: registerPartialsForLogin,
     Registration: registerPartialsForRegistration,
     Profile: registerPartialsForProfile,
+    ProfileEdit: registerPartialsForProfileEdit,
     ErrorNotFound: registerPartialsForErrorNotFound,
     ErrorServer: registerPartialsForErrorServer,
+    LoadFileModalWindow: registerPartialsForLoadFileModalWindow,
 }
 
 const CONFIGS = {
@@ -56,8 +69,10 @@ const CONFIGS = {
     Login: loginConfig,
     Registration: registrationConfig,
     Profile: profileConfig,
+    ProfileEdit: profileEditConfig,
     ErrorNotFound: errorNotFoundConfig,
     ErrorServer: errorServerConfig,
+    LoadFileModalWindow: loadFileModalConfig,
 }
 function render(html) {
     const app = document.querySelector('#app');
@@ -100,8 +115,16 @@ function registerPartialsForRegistration() {
 }
 
 function registerPartialsForProfile() {
+    Handlebars.registerPartial('profile-information', profileInformation);
     Handlebars.registerPartial('profile-info-item', profileInfoItem);
     Handlebars.registerPartial('profile-info-action', profileInfoAction);
+    Handlebars.registerPartial('navigate-back', navigateBack);
+}
+
+function registerPartialsForProfileEdit() {
+    Handlebars.registerPartial('profile-information-edit-form', profileInformationEditForm);
+    Handlebars.registerPartial('input', input);
+    Handlebars.registerPartial('button', button);
     Handlebars.registerPartial('navigate-back', navigateBack);
 }
 
@@ -126,4 +149,15 @@ function registerPartialsForLogin() {
     Handlebars.registerPartial('card', card);
     Handlebars.registerPartial('button', button);
     Handlebars.registerPartial('card-content', loginForm);
+}
+
+function registerPartialsForLoadFileModalWindow() {
+    Handlebars.registerPartial('input', input);
+    Handlebars.registerPartial('card', card);
+    Handlebars.registerPartial('button', button);
+    Handlebars.registerPartial('card-content', loadFile);
+}
+
+window.preventDefaultEvent = (e) => {
+    e.preventDefault();
 }

@@ -3,4 +3,11 @@
   flex-direction: column;
 
   width: 100%;
+
+  &__button {
+    margin-top: 60px;
+    margin-bottom: 30px;
+
+    width: 100%;
+  }
 }

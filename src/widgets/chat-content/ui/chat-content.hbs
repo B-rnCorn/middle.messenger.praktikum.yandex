@@ -2,7 +2,7 @@
     <div class="chat-content__header">
         <div class="header__info">
             <img class="info__image" src="{{imageUrl}}" alt="Image Url">
-            <div class="info__name">{{name}}</div>
+            <h2 class="info__name">{{name}}</h2>
         </div>
         <nav class="header__settings">
             <svg width="3" viewBox="0 0 3 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -12,11 +12,11 @@
             </svg>
         </nav>
     </div>
-    <main class="chat-content__main">
+    <div class="chat-content__main">
         <!--TODO: MESSAGES-->
         <div></div>
-    </main>
-    <div class="chat-content__message-input">
+    </div>
+    <form class="chat-content__message-input" onsubmit="preventDefaultEvent(event)">
         <div class="message-input__pin-file">
             <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M7.18662 13.5L14.7628 5.92389L15.7056 6.8667L8.12943 14.4428L7.18662 13.5Z" fill="#999999"/>
@@ -28,9 +28,9 @@
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M9.70092 16.0144C7.95751 17.7578 7.95123 20.5782 9.68689 22.3138C11.4226 24.0495 14.2429 24.0432 15.9863 22.2998L15.0435 21.357C13.8231 22.5774 11.8489 22.5818 10.6339 21.3668C9.41894 20.1518 9.42334 18.1776 10.6437 16.9572L9.70092 16.0144Z" fill="#999999"/>
             </svg>
         </div>
-        <input class="message-input__input">
-        <button class="message-input__send-button">
+        <input class="message-input__input" name="message">
+        <button class="message-input__send-button" type="submit">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" width="48"><path d="m561 814-43-42 168-168H160v-60h526L517 375l43-42 241 241-240 240Z"/></svg>
         </button>
-    </div>
+    </form>
 </div>

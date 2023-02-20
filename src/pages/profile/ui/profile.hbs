@@ -2,22 +2,7 @@
     <nav class="profile__navigate-back">
         {{> navigate-back}}
     </nav>
-    <div class="profile__content">
-        <div class="content__avatar">
-            <img alt="chat-img" src={{imageUrl}}>
-        </div>
-        <div class="content__name">
-            {{nameInChat}}
-        </div>
-        <ul class="content__info">
-            {{#each profileInfoItems}}
-                {{> profile-info-item}}
-            {{/each}}
-        </ul>
-        <ul class="content__actions">
-            {{#each profileInfoActions}}
-                {{> profile-info-action}}
-            {{/each}}
-        </ul>
-    </div>
+    <main class="profile__content">
+        {{> profile-information}}
+    </main>
 </div>

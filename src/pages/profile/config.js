@@ -32,6 +32,7 @@ export const profileConfig = {
     profileInfoActions: [
         {
             actionName: 'Изменить данные',
+            route: 'ProfileEdit'
         },
         {
             actionName: 'Изменить пароль',

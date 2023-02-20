@@ -25,4 +25,10 @@
 
     cursor: pointer;
   }
+
+  &__validation-text {
+    text-align: center;
+    font-size: $font-size-input-validation-text;
+    color: $theme-color-error;
+  }
 }
