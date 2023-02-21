@@ -1,0 +1,28 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+
+  background: $background-color-primary;
+
+  height: calc(100vh - 10px);
+  width: 100%;
+  overflow: hidden;
+
+  &__navigate-back {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    border-right: 1px solid $background-color-element;
+    background: $background-color-element-light;
+
+    height: 100%;
+    width: 70px;
+  }
+
+  &__content {
+    width: 100%;
+    min-width: 510px;
+  }
+}

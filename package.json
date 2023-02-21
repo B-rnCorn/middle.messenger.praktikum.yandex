@@ -1,0 +1,33 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "project work for course yandex praktikum",
+  "scripts": {
+    "dev": "parcel ./index.html --no-cache --open",
+    "build": "parcel build ./index.html --no-cache",
+    "start": "npm run build && node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/B-rnCorn/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "Sergey Sulimenko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/B-rnCorn/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/B-rnCorn/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/transformer-sass": "2.8.3",
+    "parcel": "2.8.3",
+    "sass": "1.58.1",
+    "sharp": "^0.31.3"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "handlebars": "4.7.7"
+  }
+}

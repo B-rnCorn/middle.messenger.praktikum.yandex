@@ -1,0 +1,36 @@
+.profile-info-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  margin-top: 10px;
+  border-bottom: 1px solid $background-color-element;
+  padding-bottom: 10px;
+
+  width: 100%;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__name {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    width: 45%;
+
+    font-size: $font-size-heading;
+    color: $text-color-accent;
+  }
+
+  &__value {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    width: 45%;
+
+    font-size: $font-size-heading;
+  }
+}

@@ -1,0 +1,28 @@
+.error-page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  &__error-code {
+    font-size: $font-size-page-error-number;
+    color: $text-color-accent;
+  }
+
+  &__error-message {
+    margin-top: 20px;
+
+    font-size: $font-size-large;
+  }
+
+  &__navigation-to-chat {
+    margin-top: 69px;
+
+    color: $theme-color-primary;
+    font-size: $font-size-alternative-navigation;
+    cursor: pointer;
+  }
+}

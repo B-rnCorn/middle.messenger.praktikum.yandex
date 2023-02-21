@@ -1,0 +1,63 @@
+@use './styles/variables/variables' as *;
+
+body{
+  margin: 0;
+
+  font-family: 'Inter', serif;
+  font-weight: $font-weight-default;
+  font-size: $font-size-default;
+  color: $text-color-default;
+}
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  font-size: $font-size-large;
+  font-weight: $font-weight-bold;
+  color: $text-color-accent;
+}
+
+h2 {
+  font-size: $font-size-heading;
+  font-weight: $font-weight-bold;
+  color: $text-color-accent;
+}
+
+h3 {
+  font-size: $font-size-heading;
+  font-weight: $font-weight-default;
+  color: $text-color-accent;
+}
+
+@import '../pages/chat/ui/chat';
+@import '../widgets/chat-list/ui/chat-list';
+@import '../entities/chat-list-item/ui/chat-list-item';
+@import '../widgets/chat-content/ui/chat-content';
+
+@import '../pages/login/ui/login';
+@import '../widgets/login-form/ui/login-form';
+
+@import '../pages/registration/ui/registration';
+@import '../widgets/registration-form/ui/registration-form';
+
+@import '../pages/profile/ui/profile';
+@import '../widgets/profile-information/ui/profile-information';
+@import '../entities/profile-info-item/ui/profile-info-item';
+@import '../entities/profile-info-action/ui/profile-info-action';
+@import '../features/navigate-back/ui/navigate-back';
+
+@import '../pages/profile-edit/ui/profile-edit';
+@import '../widgets/profile-information-edit-form/ui/profile-information-edit-form';
+
+@import '../pages/error-not-found/error-not-found';
+@import '../pages/error-server/error-server';
+@import '../widgets/error-page-content/error-page-content';
+
+@import '../widgets/load-file-modal-window/ui/load-file-modal-window';
+@import '../features/load-file/ui/load-file';
+
+@import '../shared/card/card';
+@import '../shared/input/input';
+@import '../shared/button/button';

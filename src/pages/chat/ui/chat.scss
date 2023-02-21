@@ -1,0 +1,28 @@
+.chat {
+  display: flex;
+  flex-direction: row;
+
+  background: $background-color-primary;
+
+  height: calc(100vh - 10px);
+  width: 100%;
+  overflow: hidden;
+
+  &__left-panel {
+    display: flex;
+    flex-direction: column;
+
+    border-right: 1px solid $background-color-element;
+
+    height: 100%;
+    width: 30%;
+  }
+
+  &__right-panel {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+    width: 70%;
+  }
+}

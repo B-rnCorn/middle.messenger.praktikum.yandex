@@ -1,0 +1,17 @@
+<div class="button">
+    <button class="button__button"
+            onclick="navigateByRoutes('{{onClickAction}}')"
+        {{#if buttonType}}
+            type="{{buttonType}}"
+        {{/if}}
+    >
+        {{buttonText}}
+    </button>
+    {{#if buttonAlternativeNavigationText}}
+        <nav class="button__alternative-navigation"
+             onclick="navigateByRoutes('{{buttonAlternativeNavigationRoute}}')">{{buttonAlternativeNavigationText}}</nav>
+    {{/if}}
+    {{#if buttonValidationText}}
+        <div class="button__validation-text">{{buttonValidationText}}</div>
+    {{/if}}
+</div>

@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card__header">
+        {{header}}
+    </div>
+    <div class="card__content">
+        {{> card-content body}}
+    </div>
+    {{#if button}}
+        <div class="card__button">
+            {{> button button}}
+        </div>
+    {{/if}}
+</div>

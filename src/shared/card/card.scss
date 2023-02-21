@@ -1,0 +1,38 @@
+.card {
+  position: relative;
+
+  border-radius: 12px;
+  background: $background-color-primary;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+
+  width: 340px;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    margin-top: 50px;
+
+    font-size: $font-size-large;
+    color: $text-color-accent;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    margin-top: 40px;
+    margin-left: 30px;
+    margin-right: 30px;
+
+    width: calc(100% - 60px);
+  }
+
+  &__button {
+    margin: 40px 30px 30px;
+
+    width: calc(100% - 60px);
+  }
+}
