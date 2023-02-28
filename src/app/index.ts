@@ -1,11 +1,11 @@
-import { chatConfig } from '../pages/chat/config'
-import { loginConfig } from '../pages/login/config';
-import { registrationConfig } from '../pages/registration/config';
-import { profileConfig } from '../pages/profile/config';
-import { profileEditConfig} from '../pages/profile-edit/config';
-import { errorServerConfig } from '../pages/error-server/config';
-import { errorNotFoundConfig } from '../pages/error-not-found/config';
-import { loadFileModalConfig} from '../widgets/load-file-modal-window/config';
+import {chatConfig} from '~/pages/chat/config'
+import {loginConfig} from '~/pages/login/config';
+import {registrationConfig} from '~/pages/registration/config';
+import {profileConfig} from '~/pages/profile/config';
+import {profileEditConfig} from '~/pages/profile-edit/config';
+import {errorServerConfig} from '~/pages/error-server/config';
+import {errorNotFoundConfig} from '~/pages/error-not-found/model/config';
+import {loadFileModalConfig} from '~/widgets/load-file-modal-window/config';
 
 import profile from '../pages/profile/ui/profile.hbs'
 import profileInformation from '../widgets/profile-information/ui/profile-information.hbs'
@@ -18,16 +18,16 @@ import profileInformationEditForm from '../widgets/profile-information-edit-form
 
 import chat from '../pages/chat/ui/chat.hbs'
 import chatList from '../widgets/chat-list/ui/chat-list.hbs'
-import chatListItem from  '../entities/chat-list-item/ui/chat-list-item.hbs'
+import chatListItem from '../entities/chat-list-item/ui/chat-list-item.hbs'
 import chatContent from '../widgets/chat-content/ui/chat-content.hbs'
 
 import login from '../pages/login/ui/login.hbs'
 import loginForm from '../widgets/login-form/ui/login-form.hbs'
 
 import registration from '../pages/registration/ui/registration.hbs'
-import registrationForm from  '../widgets/registration-form/ui/registration-form.hbs'
+import registrationForm from '../widgets/registration-form/ui/registration-form.hbs'
 
-import errorNotFound from '../pages/error-not-found/error-not-fount.hbs'
+import errorNotFound from '~/pages/error-not-found/ui/error-not-found.hbs'
 import errorServer from '../pages/error-server/error-server.hbs'
 import errorPageContent from '../widgets/error-page-content/error-page-content.hbs'
 
@@ -39,8 +39,7 @@ import input from '../shared/input/input.hbs'
 import button from '../shared/button/button.hbs'
 
 import demo from '../app/demo-error-pages/demo.hbs'
-
-import * as Handlebars from "handlebars/dist/handlebars.runtime";
+import Handlebars from './core/HandlebarsRuntimeInstance';
 
 const ROUTES = {
     Chat: chat,
@@ -74,13 +73,16 @@ const CONFIGS = {
     ErrorServer: errorServerConfig,
     LoadFileModalWindow: loadFileModalConfig,
 }
-function render(html) {
-    const app = document.querySelector('#app');
 
-    app.innerHTML = html;
+function render(html: string) {
+    const app = document.querySelector('#app');
+    if (app) {
+        app.innerHTML = html;
+    }
 }
 
-window.navigateByRoutes = function (routeName) {
+// @ts-ignore
+window.navigateByRoutes = function (routeName: string) {
     const page = ROUTES[routeName];
 
     PARTIALS[routeName] && PARTIALS[routeName]();
@@ -88,7 +90,7 @@ window.navigateByRoutes = function (routeName) {
     render(page(CONFIGS[routeName]));
 }
 
-window.addEventListener('DOMContentLoaded',() => {
+window.addEventListener('DOMContentLoaded', () => {
     registerPartialsForLogin();
 
     render(ROUTES.Login(CONFIGS.Login));
@@ -104,7 +106,7 @@ function registerPartialsForChat() {
 }
 
 function registerPartialsForRegistration() {
-    Handlebars.registerHelper('isError', function (value) {
+    Handlebars.registerHelper('isError', function (value: string): boolean {
         return value === 'error';
     });
 
@@ -138,7 +140,7 @@ function registerPartialsForErrorServer() {
 
 function registerPartialsForLogin() {
 
-    Handlebars.registerHelper('isError', function (value) {
+    Handlebars.registerHelper('isError', function (value: string): boolean {
         return value === 'error';
     });
 
@@ -158,6 +160,7 @@ function registerPartialsForLoadFileModalWindow() {
     Handlebars.registerPartial('card-content', loadFile);
 }
 
-window.preventDefaultEvent = (e) => {
+// @ts-ignore
+window.preventDefaultEvent = (e: SubmitEvent) => {
     e.preventDefault();
 }

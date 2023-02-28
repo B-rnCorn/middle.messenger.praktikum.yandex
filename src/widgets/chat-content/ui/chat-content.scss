@@ -15,6 +15,7 @@
     height: 60px;
 
     .header {
+
       &__info {
 
         display: flex;
@@ -55,12 +56,15 @@
       }
     }
   }
+
   &__main {
     overflow-y: scroll;
+
     div {
       height: calc(100vh - 150px);
     }
   }
+
   &__message-input {
     width: 100%;
     display: flex;
