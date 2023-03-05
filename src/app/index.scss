@@ -64,9 +64,9 @@ h3 {
 
 @import '../pages/error-not-found/ui/error-not-found';
 
-@import '../pages/error-server/error-server';
+@import '../pages/error-server/ui/error-server';
 
-@import '../widgets/error-page-content/error-page-content';
+@import '../widgets/error-page-content/ui/error-page-content';
 
 @import '../widgets/load-file-modal-window/ui/load-file-modal-window';
 
@@ -74,6 +74,6 @@ h3 {
 
 @import '../shared/card/card';
 
-@import '../shared/input/input';
+@import '../shared/input-field/input-field';
 
 @import '../shared/button/button';

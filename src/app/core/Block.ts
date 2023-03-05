@@ -1,7 +1,13 @@
 import {v4 as generateUUID} from 'uuid';
 import EventBus from "~/app/core/EventBus";
-import {BlockChildren, BlockEvents, BlockProps, BlockPropsAndChildren, Props} from "~/app/core/types";
-
+import {
+    BlockChildren,
+    BlockEvents,
+    BlockProps,
+    BlockPropsAndChildren,
+    Props,
+    PropsDefaultFields
+} from "~/app/core/types";
 export class Block {
     static EVENTS = {
         COMPONENT_DID_INIT: "component-did-init",
@@ -10,47 +16,45 @@ export class Block {
         COMPONENT_DID_UPDATE: "component-did-update",
     };
 
-    private _id: string | null = null;
+    public id: string | null = null;
     private _element: HTMLElement | null = null;
-    private _isNeedInternalId: boolean = false;
-    private _blockEvents: BlockEvents = {};
+    //private _isNeedInternalId: boolean = false;
     private _tagName: string = 'div';
+    protected blockEvents: BlockEvents = {};
+    protected blockProps: BlockProps;
+    protected children: BlockChildren;
+    protected eventBus: () => EventBus;
 
-    protected _blockProps: BlockProps;
-    protected _children: BlockChildren;
-    //private _props: Props;
-    private _eventBus: () => EventBus;
-
-    constructor({tagName = "div", blockPropsAndChildren = {}, isNeedInternalId = false, blockEvents = {}}: Props) {
+    constructor({tagName, blockPropsAndChildren = {}, isNeedInternalId = true, blockEvents = {}}: Props) {
 
         const eventBus = new EventBus();
 
-        const {children, props } = this._getChildren(blockPropsAndChildren);
+        const {children, props } = this.splitPropsAndChildren(blockPropsAndChildren);
 
-        this._children = children;
-        this._isNeedInternalId = isNeedInternalId;
-        this._blockEvents = blockEvents;
+        this.children = children;
+        this.blockEvents = blockEvents;
         this._tagName = tagName;
 
 
         if (isNeedInternalId) {
-            this._id = generateUUID();
+            this.id = generateUUID();
         }
 
-        this._blockProps = this._makePropsProxy(isNeedInternalId ? {...props, _id: this._id} : {...props});
+        this.blockProps = this._makePropsProxy(isNeedInternalId ? {...props, id: this.id} : {...props});
 
-        this._eventBus = () => eventBus;
+        this.eventBus = () => eventBus;
 
         this._registerLifecycleEvents(eventBus);
         eventBus.emit(Block.EVENTS.COMPONENT_DID_INIT);
     }
 
-    private _getChildren(blockPropsAndChildren: BlockPropsAndChildren) {
+    protected splitPropsAndChildren(blockPropsAndChildren: BlockPropsAndChildren) {
         const children: BlockChildren = {};
         const props: BlockProps = {};
 
         Object.entries(blockPropsAndChildren).forEach(([key, value]) => {
-            if (value instanceof Block) {
+            //@ts-ignore
+            if (!Object.values(PropsDefaultFields).includes(key) && typeof value === 'object') {
                 children[key] = value;
             } else {
                 props[key] = value;
@@ -68,30 +72,25 @@ export class Block {
     }
 
     private _addBlockEvents(): void {
-        Object.keys(this._blockEvents).forEach((eventName: string) => {
-            this._element!.addEventListener(eventName, this._blockEvents[eventName]);
+        Object.keys(this.blockEvents).forEach((eventName: string) => {
+            this._element!.addEventListener(eventName, this.blockEvents[eventName]);
         });
     }
 
     private _removeBlockEvents(): void {
-        Object.keys(this._blockEvents).forEach((eventName: string) => {
-            this._element!.removeEventListener(eventName, this._blockEvents[eventName]);
+        Object.keys(this.blockEvents).forEach((eventName: string) => {
+            this._element!.removeEventListener(eventName, this.blockEvents[eventName]);
         });
     }
 
-    private _createResources() {
-        this._element = this._createDocumentElement(this._tagName);
-    }
-
     protected init() {
-        this._createResources();
-        this._eventBus().emit(Block.EVENTS.COMPONENT_DID_RENDER);
+        this.eventBus().emit(Block.EVENTS.COMPONENT_DID_RENDER);
     }
 
     private _componentDidMount() {
         this.componentDidMount({});
 
-        Object.values(this._children).forEach(child => {
+        Object.values(this.children).forEach(child => {
             Array.isArray(child) ? child.forEach(item => item.dispatchComponentDidMount()) : child.dispatchComponentDidMount();
         });
     }
@@ -101,12 +100,14 @@ export class Block {
     }
 
     public dispatchComponentDidMount() {
-        this._eventBus().emit(Block.EVENTS.COMPONENT_DID_MOUNT);
+        this.eventBus().emit(Block.EVENTS.COMPONENT_DID_MOUNT);
     }
 
     private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
         const response = this.componentDidUpdate(oldProps, newProps);
-        if (response) this._render();
+        if (response) {
+            this._render();
+        }
     }
 
 // Может переопределять пользователь, необязательно трогать
@@ -114,14 +115,18 @@ export class Block {
         return true;
     }
 
+    public componentForceUpdate(): void {
+        this.eventBus().emit(Block.EVENTS.COMPONENT_DID_RENDER);
+    }
+
     setProps(nextProps: BlockProps) {
         if (!nextProps) {
             return;
         }
 
-        Object.assign(this._blockProps, nextProps);
+        Object.assign(this.blockProps, nextProps);
 
-        this._eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, this._blockProps, this);
+        this.eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, this.blockProps, this);
     }
 
     get element() {
@@ -131,12 +136,12 @@ export class Block {
     private _render() {
         const block = this.render();
 
-        this._removeBlockEvents();
-
-        this._element!.innerHTML = '';
-
-        this._element!.append(block);
-
+        const newElement = block.firstElementChild as HTMLElement;
+        if (this._element) {
+            this._removeBlockEvents();
+            this._element.replaceWith(newElement);
+        }
+        this._element = newElement;
         this._addBlockEvents();
     }
 
@@ -146,14 +151,12 @@ export class Block {
         return;
     }
 
-    public getContent() {
+    public getContent(): HTMLElement | null  {
         return this.element;
     }
 
     private _makePropsProxy(props: BlockProps) {
         const self = this;
-
-        console.log(props);
 
         return new Proxy(props, {
             get(target, prop: string) {
@@ -169,7 +172,7 @@ export class Block {
                     throw new Error("Отказано в доступе");
                 } else {
                     target[prop] = val;
-                    self._eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, target, this);
+                    self.eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, target, this);
                     return true;
                 }
             },
@@ -181,30 +184,30 @@ export class Block {
     }
 
     private _replacePlug(fragment: HTMLTemplateElement, child: Block) {
-        const plug: HTMLElement | null = fragment.content.querySelector(`[data-id="${child._id}"]`);
+        const plug: HTMLElement | null = fragment.content.querySelector(`[data-id="${child.id}"]`);
 
         if (plug) {
             child.getContent()?.append(...Array.from(plug.childNodes));
             // @ts-ignore
-            stub.replaceWith(child.getContent());
+            plug.replaceWith(child.getContent());
         }
     }
 
     protected compile(template: (props: BlockProps) => string, props: BlockProps) {
-        const propsAndPlugs: BlockProps = {...props};
+        const propsAndPlugs: BlockProps = {...this.splitPropsAndChildren(props).props};
 
-        Object.entries(this._children).forEach(([name, child]: [string, Block | Block[]]) => {
+        Object.entries(this.children).forEach(([name, child]: [string, Block | Block[]]) => {
             if (Array.isArray(child)) {
-                propsAndPlugs[name] = child.map((item: Block) => `<div data-id="${item._id}"></div>`);
+                propsAndPlugs[name] = child.map((item: Block) => `<div data-id="${item.id}"></div>`);
             } else {
-                propsAndPlugs[name] = `<div data-id="${child._id}"></div>`;
+                propsAndPlugs[name] = `<div data-id="${child.id}"></div>`;
             }
         });
 
         const fragment = this._createDocumentElement("template") as HTMLTemplateElement;
         fragment.innerHTML = template(propsAndPlugs);
 
-        Object.values(this._children).forEach((child: Block | Block[]) => {
+        Object.values(this.children).forEach((child: Block | Block[]) => {
             if (Array.isArray(child)) {
                 child.forEach((item) => {
                     this._replacePlug(fragment, item);
@@ -219,8 +222,8 @@ export class Block {
 
     private _createDocumentElement(tagName: string) {
         const element = document.createElement(tagName);
-        if (this._isNeedInternalId && this._id) {
-            element.setAttribute("data-id", this._id);
+        if (this.id) {
+            element.setAttribute("data-id", this.id);
         }
         return element;
     }

@@ -1,8 +1,8 @@
-<form class="login-form" onsubmit="preventDefaultEvent(event)">
+<form class="login-form">
     {{#each loginFormItems}}
-        {{> input}}
+        {{{this}}}
     {{/each}}
     <div class="login-form__button">
-        {{> button loginFormButton }}
+        {{{loginFormButton }}}
     </div>
 </form>

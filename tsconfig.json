@@ -1,12 +1,14 @@
 {
     "compilerOptions": {
         "outDir": "dist",
-        "target": "es2017",
+        "target": "es2022",
         "declaration": false,
-        "module": "commonjs",
+        "module": "es2022",
+        "moduleResolution": "Node",
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
+        "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
         "baseUrl": ".",
         "sourceMap": true,
@@ -16,7 +18,8 @@
             "~/features/*": ["./src/features/*"],
             "~/pages/*": ["./src/pages/*"],
             "~/widgets/*": ["./src/widgets/*"],
-            "~/shared/*": [ "./src/shared/*" ]
+            "~/shared/*": [ "./src/shared/*" ],
+            "~/images/*": ["./src/app/images/*"]
         },
         "exclude": ["node_modules"]
     }
