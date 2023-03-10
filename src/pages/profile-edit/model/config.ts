@@ -1,13 +1,13 @@
 import * as images from "~/images/image-urls";
 import {NavigateBack} from "~/features/navigate-back";
-import {Props} from "~/app/core/types";
 import {ProfileInformationEditForm} from "~/widgets/profile-information-edit-form";
 import {Button} from "~/shared/button";
 import {InputField} from "~/shared/input-field";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
 import {Input} from "~/shared/input-field/input";
+import {ProfileEditProps} from "~/pages/profile-edit";
 
-export const profileEditConfig: Props = {
+export const profileEditConfig: ProfileEditProps = {
     blockPropsAndChildren: {
         profileInformationEditForm: new ProfileInformationEditForm({
             blockPropsAndChildren: {
@@ -22,6 +22,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.email,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'email',
@@ -42,6 +43,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.login,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'login',
@@ -62,6 +64,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.firstName,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'first_name',
@@ -82,6 +85,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.firstName,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'second_name',
@@ -102,6 +106,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.firstName,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'display_name',
@@ -122,6 +127,7 @@ export const profileEditConfig: Props = {
                             inputFieldErrorText: regularExpressionValidationText.firstName,
                             isInputFieldValid: true,
                             isMandatory: true,
+                            isFormInput: false,
                             input: new Input({
                                 blockPropsAndChildren: {
                                     inputId: 'phone',

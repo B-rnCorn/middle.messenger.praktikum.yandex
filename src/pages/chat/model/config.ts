@@ -2,8 +2,9 @@ import * as images from '~/images/image-urls';
 import {ChatList} from '~/widgets/chat-list';
 import {ChatListItem} from "~/entities/chat-list-item";
 import {ChatContent} from "~/widgets/chat-content";
+import {ChatPageProps} from "~/pages/chat";
 
-export const chatConfig = {
+export const chatConfig: ChatPageProps = {
     blockPropsAndChildren: {
         chatList: new ChatList({
             blockPropsAndChildren: {

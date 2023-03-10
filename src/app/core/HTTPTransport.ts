@@ -7,7 +7,7 @@ enum Methods {
 
 type Options = {
     headers?: Record<string, string>;
-    method?: Methods;
+    method: Methods;
     timeout?: number;
     retries?: number;
     data?: Data;
@@ -36,30 +36,30 @@ function queryStringify(data: Data): string {
     }
 }
 
+export type HTTPMethod = (
+    url: string,
+    options: Options,
+) => Promise<unknown>
+
 class HTTPTransport {
-    get = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: Methods.GET}, options.timeout);
-    };
+    get: HTTPMethod = (url, options) => (this.request(options.data ? `${url}${queryStringify(options.data)}` : url, {
+        ...options,
+        method: Methods.GET
+    }, options.timeout));
 
-    post = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: Methods.POST}, options.timeout);
-    };
+    post: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.POST}, options.timeout));
 
-    put = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: Methods.PUT}, options.timeout);
-    };
+    put: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.PUT}, options.timeout));
 
-    delete = (url: string, options: Options = {}) => {
-        return this.request(url, {...options, method: Methods.DELETE}, options.timeout);
-    };
+    delete: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.DELETE}, options.timeout));
 
     request = (url: string, options: Options, timeout = 5000) => {
-        const {method = Methods.GET, data={}, headers = {}} = options;
+        const {method, data = {}, headers = {}} = options;
 
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open(method, method === Methods.GET ? `${url}${queryStringify(data)}` : url);
+            xhr.open(method, url);
 
             if (headers) {
                 Object.keys(headers).forEach((key) => {
@@ -69,7 +69,7 @@ class HTTPTransport {
 
             xhr.timeout = timeout ? timeout : 5000;
 
-            xhr.onload = function() {
+            xhr.onload = function () {
                 resolve(xhr);
             }
             xhr.ontimeout = reject;
@@ -89,7 +89,7 @@ function fetchWithRetry(url: string, options: Options) {
     const {retries = 2, ...requestOptions} = options;
 
     function onRequestFailed() {
-        if ( retries === 0) {
+        if (retries === 0) {
             throw new Error('Fetch failed after several retries')
         }
         return this.fetchWithRetry(url, {...requestOptions, ...{retries: retries - 1}});

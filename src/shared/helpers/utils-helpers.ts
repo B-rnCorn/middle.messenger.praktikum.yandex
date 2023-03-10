@@ -1,4 +1,4 @@
-export function deepEqual(firstObject: object, secondObject: object) {
+/*export function deepEqual(firstObject: object, secondObject: object) {
     if (firstObject === secondObject) {
         return true;
     } else {
@@ -16,4 +16,4 @@ export function deepEqual(firstObject: object, secondObject: object) {
 
         return true;
     }
-}
+}*/

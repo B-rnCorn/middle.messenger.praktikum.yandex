@@ -1,15 +1,15 @@
 import {Block} from '~/app/core/Block';
 // @ts-ignore
-import template from './ui/error-not-found.hbs';
+import template from './ui/error-server.hbs';
 import {ErrorPageContent} from "~/widgets/error-page-content";
 
-export type ErrorNotFoundProps = {
+export type ErrorServerProps = {
     blockPropsAndChildren: {
         errorPageContent: ErrorPageContent
     }
 }
 
-export class ErrorNotFound extends Block<ErrorNotFoundProps> {
+export class ErrorServer extends Block<ErrorServerProps> {
     protected render(): DocumentFragment {
         return this.compile(template, this.blockProps);
     }

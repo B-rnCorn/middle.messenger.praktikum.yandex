@@ -1,12 +1,12 @@
-import {Props} from "~/app/core/types";
+import {BlockProps} from "~/app/core/types";
 import {Card} from "~/shared/card";
 import {LoadFile} from "~/features/load-file";
 import {Button} from "~/shared/button";
 
-export const loadFileModalConfig: Props = {
-    blockPropsAndChildren: new Card ({
-        blockPropsAndChildren: {
-            cardContent: {
+export const loadFileModalConfig: BlockProps = {
+    blockPropsAndChildren: {
+        cardContent: new Card({
+            blockPropsAndChildren: {
                 header: 'Загрузите файл',
                 body: new LoadFile({
                     blockPropsAndChildren: {
@@ -25,6 +25,6 @@ export const loadFileModalConfig: Props = {
                     }
                 }),
             }
-        }
-    }),
+        })
+    },
 }

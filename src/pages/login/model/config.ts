@@ -5,8 +5,9 @@ import {Button} from "~/shared/button";
 import {Input} from "~/shared/input-field/input";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
 import {submitHandler} from "~/app/core/submit-handler";
+import {LoginPageProps} from "~/pages/login";
 
-export const loginConfig = {
+export const loginConfig: LoginPageProps = {
     tagName: 'div',
     blockPropsAndChildren: {
         cardContent: new Card({
@@ -72,7 +73,6 @@ export const loginConfig = {
                                 buttonText: 'Авторизоваться',
                                 buttonAlternativeNavigationText: 'Нет аккаунта?',
                                 buttonAlternativeNavigationRoute: 'Registration',
-                                /*onClickAction: 'Chat',*/
                                 buttonType: 'submit'
                             }
                         }),

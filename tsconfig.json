@@ -21,6 +21,6 @@
             "~/shared/*": [ "./src/shared/*" ],
             "~/images/*": ["./src/app/images/*"]
         },
-        "exclude": ["node_modules"]
+        "exclude": ["node_modules", "**/*.hbs"]
     }
 }

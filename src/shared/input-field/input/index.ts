@@ -1,9 +1,24 @@
 import {Block} from "~/app/core/Block";
 //@ts-ignore
 import template from "./input.hbs";
+import {BlockEvents} from "~/app/core/types";
 
-export class Input extends Block {
+type InputProps = {
+    tagName?: string;
+    isNeedInternalId?: boolean;
+    id?: string;
+    blockEvents?: BlockEvents
+    blockPropsAndChildren: {
+        inputId: string,
+        inputName: string,
+        inputStatus: string,
+        inputValue: string,
+        inputType: string,
+    }
+}
+
+export class Input extends Block<InputProps> {
     protected render(): DocumentFragment {
-        return  this.compile(template, this.blockProps);
+        return this.compile(template, this.blockProps);
     }
 }

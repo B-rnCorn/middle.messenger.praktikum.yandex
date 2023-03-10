@@ -1,6 +1,7 @@
 import {ErrorPageContent} from "~/widgets/error-page-content";
+import {ErrorServerProps} from "~/pages/error-server";
 
-export const errorServerConfig = {
+export const errorServerConfig: ErrorServerProps = {
     blockPropsAndChildren: {
         errorPageContent: new ErrorPageContent({
             blockPropsAndChildren: {

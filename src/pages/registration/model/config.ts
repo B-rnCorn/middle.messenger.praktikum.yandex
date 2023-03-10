@@ -5,8 +5,9 @@ import {Input} from "~/shared/input-field/input";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
 import {Button} from "~/shared/button";
 import {submitHandler} from "~/app/core/submit-handler";
+import {RegistrationPageProps} from "~/pages/registration";
 
-export const registrationConfig = {
+export const registrationConfig: RegistrationPageProps = {
     blockPropsAndChildren: {
         cardContent: new Card({
             blockPropsAndChildren: {

@@ -3,27 +3,26 @@ import EventBus from "~/app/core/EventBus";
 import {
     BlockChildren,
     BlockEvents,
-    BlockProps,
+    BlockOwnProps,
     BlockPropsAndChildren,
-    Props,
     PropsDefaultFields
 } from "~/app/core/types";
-export class Block {
-    static EVENTS = {
+export abstract class Block<Props extends Record<string, any>> {
+    static EVENTS: Record<string, string> = {
         COMPONENT_DID_INIT: "component-did-init",
         COMPONENT_DID_MOUNT: "component-did-mount",
         COMPONENT_DID_RENDER: "component-did-render",
         COMPONENT_DID_UPDATE: "component-did-update",
-    };
+    } as const;
 
     public id: string | null = null;
     private _element: HTMLElement | null = null;
     //private _isNeedInternalId: boolean = false;
     private _tagName: string = 'div';
-    protected blockEvents: BlockEvents = {};
-    protected blockProps: BlockProps;
+    public blockEvents: BlockEvents = {};
+    public blockProps: BlockOwnProps;
     protected children: BlockChildren;
-    protected eventBus: () => EventBus;
+    public eventBus: () => EventBus;
 
     constructor({tagName, blockPropsAndChildren = {}, isNeedInternalId = true, blockEvents = {}}: Props) {
 
@@ -50,11 +49,10 @@ export class Block {
 
     protected splitPropsAndChildren(blockPropsAndChildren: BlockPropsAndChildren) {
         const children: BlockChildren = {};
-        const props: BlockProps = {};
+        const props: BlockOwnProps = {};
 
         Object.entries(blockPropsAndChildren).forEach(([key, value]) => {
-            //@ts-ignore
-            if (!Object.values(PropsDefaultFields).includes(key) && typeof value === 'object') {
+            if (!(Object.values(PropsDefaultFields) as string[]).includes(key) && typeof value === 'object') {
                 children[key] = value;
             } else {
                 props[key] = value;
@@ -96,14 +94,14 @@ export class Block {
     }
 
 // Может переопределять пользователь, необязательно трогать
-    protected componentDidMount(oldProps: BlockProps) {
+    protected componentDidMount(oldProps: BlockOwnProps) {
     }
 
     public dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.COMPONENT_DID_MOUNT);
     }
 
-    private _componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+    private _componentDidUpdate(oldProps: BlockOwnProps, newProps: BlockOwnProps) {
         const response = this.componentDidUpdate(oldProps, newProps);
         if (response) {
             this._render();
@@ -111,7 +109,7 @@ export class Block {
     }
 
 // Может переопределять пользователь, необязательно трогать
-    protected componentDidUpdate(oldProps: BlockProps, newProps: BlockProps) {
+    protected componentDidUpdate(oldProps: BlockOwnProps, newProps: BlockOwnProps) {
         return true;
     }
 
@@ -119,7 +117,7 @@ export class Block {
         this.eventBus().emit(Block.EVENTS.COMPONENT_DID_RENDER);
     }
 
-    setProps(nextProps: BlockProps) {
+    setProps(nextProps: BlockOwnProps) {
         if (!nextProps) {
             return;
         }
@@ -145,17 +143,13 @@ export class Block {
         this._addBlockEvents();
     }
 
-// Может переопределять пользователь, необязательно трогать
-    protected render(): DocumentFragment {
-        //@ts-ignore
-        return;
-    }
+    protected abstract render(): DocumentFragment;
 
     public getContent(): HTMLElement | null  {
         return this.element;
     }
 
-    private _makePropsProxy(props: BlockProps) {
+    private _makePropsProxy(props: BlockOwnProps) {
         const self = this;
 
         return new Proxy(props, {
@@ -176,29 +170,27 @@ export class Block {
                     return true;
                 }
             },
-            // @ts-ignore
             deleteProperty(target, prop) {
-                throw new Error("Нет прав");
+                throw new Error(`Нет прав для удаления ${String(prop)} из ${typeof target}`);
             },
         });
     }
 
-    private _replacePlug(fragment: HTMLTemplateElement, child: Block) {
+    private _replacePlug(fragment: HTMLTemplateElement, child: Block<Props>) {
         const plug: HTMLElement | null = fragment.content.querySelector(`[data-id="${child.id}"]`);
 
         if (plug) {
             child.getContent()?.append(...Array.from(plug.childNodes));
-            // @ts-ignore
-            plug.replaceWith(child.getContent());
+            plug.replaceWith(child.getContent()!);
         }
     }
 
-    protected compile(template: (props: BlockProps) => string, props: BlockProps) {
-        const propsAndPlugs: BlockProps = {...this.splitPropsAndChildren(props).props};
+    protected compile(template: (props: BlockOwnProps) => string, props: BlockOwnProps) {
+        const propsAndPlugs: BlockOwnProps = {...this.splitPropsAndChildren(props).props};
 
-        Object.entries(this.children).forEach(([name, child]: [string, Block | Block[]]) => {
+        Object.entries(this.children).forEach(([name, child]: [string, Block<Props> | Block<Props>[]]) => {
             if (Array.isArray(child)) {
-                propsAndPlugs[name] = child.map((item: Block) => `<div data-id="${item.id}"></div>`);
+                propsAndPlugs[name] = child.map((item: Block<Props>) => `<div data-id="${item.id}"></div>`);
             } else {
                 propsAndPlugs[name] = `<div data-id="${child.id}"></div>`;
             }
@@ -207,7 +199,7 @@ export class Block {
         const fragment = this._createDocumentElement("template") as HTMLTemplateElement;
         fragment.innerHTML = template(propsAndPlugs);
 
-        Object.values(this.children).forEach((child: Block | Block[]) => {
+        Object.values(this.children).forEach((child: Block<Props> | Block<Props>[]) => {
             if (Array.isArray(child)) {
                 child.forEach((item) => {
                     this._replacePlug(fragment, item);

@@ -1,10 +1,21 @@
 import {Block} from "~/app/core/Block";
-import { submitHandler } from "~/app/core/submit-handler";
+import {submitHandler} from "~/app/core/submit-handler";
 //@ts-ignore
 import template from "./ui/login-form.hbs";
 import {isValid} from "~/shared/helpers/validate-helpers";
+import {BlockEvents} from "~/app/core/types";
+import {InputField} from "~/shared/input-field";
+import {Button} from "~/shared/button";
 
-export class LoginForm extends Block {
+export type LoginFormProps = {
+    blockEvents: BlockEvents
+    blockPropsAndChildren: {
+        loginFormItems: InputField[],
+        loginFormButton: Button
+    }
+}
+
+export class LoginForm extends Block<LoginFormProps> {
 
     submitHandler: typeof submitHandler;
 
@@ -16,7 +27,7 @@ export class LoginForm extends Block {
     }
 
     protected render(): DocumentFragment {
-        return  this.compile(template, this.blockProps);
+        return this.compile(template, this.blockProps);
     }
 
     public navigate(): void {

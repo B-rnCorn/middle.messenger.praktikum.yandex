@@ -8,7 +8,7 @@ import {errorNotFoundConfig} from '~/pages/error-not-found/model/config';
 //import {loadFileModalConfig} from '~/widgets/load-file-modal-window/model/config';
 
 import {ErrorNotFound} from '~/pages/error-not-found';
-import {ErrorServer} from "~/pages/error-server/index.htm";
+import {ErrorServer} from "~/pages/error-server";
 import {LoginPage} from "~/pages/login";
 import {RegistrationPage} from "~/pages/registration";
 import {Block} from "~/app/core/Block";
@@ -55,7 +55,7 @@ window.navigateByRoutes = function (routeName: string): void {
     }
 }
 
-function render(page: Block): Element | null  {
+function render(page: Block<Record<string, any>>): Element | null  {
     const app = document.querySelector('#app');
     if (app && !!page.getContent()) {
         app.innerHTML = '';

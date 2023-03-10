@@ -3,9 +3,9 @@ import {ProfileInformation} from "~/widgets/profile-information";
 import {ProfileInfoItem} from "~/entities/profile-info-item";
 import {ProfileInfoAction} from "~/entities/profile-info-action";
 import {NavigateBack} from "~/features/navigate-back";
-import {Props} from "~/app/core/types";
+import {ProfileProps} from "~/pages/profile";
 
-export const profileConfig: Props = {
+export const profileConfig: ProfileProps = {
     blockPropsAndChildren: {
         profileInformation: new ProfileInformation({
             blockPropsAndChildren: {

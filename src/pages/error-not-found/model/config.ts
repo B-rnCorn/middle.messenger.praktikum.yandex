@@ -1,7 +1,7 @@
 import {ErrorPageContent} from "~/widgets/error-page-content";
-import {Props} from "~/app/core/types";
+import {ErrorNotFoundProps} from "~/pages/error-not-found";
 
-export const errorNotFoundConfig: Props = {
+export const errorNotFoundConfig: ErrorNotFoundProps = {
     blockPropsAndChildren: {
         errorPageContent: new ErrorPageContent({
                 blockPropsAndChildren: {
