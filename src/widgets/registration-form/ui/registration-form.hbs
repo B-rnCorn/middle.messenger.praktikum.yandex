@@ -1,8 +1,8 @@
 <form class="registration-form" onsubmit="preventDefaultEvent(event)">
     {{#each registrationFormItems}}
-        {{> input}}
+        {{{this}}}
     {{/each}}
     <div class="registration-form__button">
-        {{> button registrationFormButton }}
+       {{{registrationFormButton }}}
     </div>
 </form>

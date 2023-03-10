@@ -7,12 +7,12 @@
     </h1>
     <ul class="profile-information__info">
         {{#each profileInfoItems}}
-            {{> profile-info-item}}
+            {{{this}}}
         {{/each}}
     </ul>
     <ul class="profile-information__actions">
         {{#each profileInfoActions}}
-            {{> profile-info-action}}
+            {{{this}}}
         {{/each}}
     </ul>
 </div>

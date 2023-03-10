@@ -3,5 +3,6 @@
     "transformers": {
         "*.hbs": ["@anikin/parcel-transformer-handlebars-precompile"],
         "*.sass": ["@parcel/transformer-sass"]
-    }
+    },
+    "resolvers": ["parcel-resolver-ts-base-url", "..."]
 }

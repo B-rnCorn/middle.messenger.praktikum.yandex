@@ -1,0 +1,13 @@
+<div class="input-field">
+    {{#if inputFieldLabel}}
+        <label for="{{inputFieldId}}" class="input-field__label">
+            {{inputFieldLabel}}
+        </label>
+    {{/if}}
+    {{{input}}}
+    <label class="input-field__validation-text">
+        {{#unless isInputFieldValid}}
+            {{inputFieldErrorText}}
+        {{/unless}}
+    </label>
+</div>
