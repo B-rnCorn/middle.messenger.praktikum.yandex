@@ -1,113 +1,118 @@
 .chat-content {
 
-  display: grid;
-  grid-template-rows: 60px calc(100% - 120px) 60px;
+    display: grid;
+    grid-template-rows: 60px calc(100% - 120px) 60px;
 
-  &__header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-
-    margin-left: 20px;
-    border-bottom: $background-color-element 1px solid;
-
-    height: 60px;
-
-    .header {
-      &__info {
-
+    &__header {
         display: flex;
         flex-direction: row;
         align-items: center;
+        justify-content: space-between;
 
-        .info {
+        margin-left: 20px;
+        border-bottom: $background-color-element 1px solid;
 
-          &__image {
-            border-radius: 25px;
-            background-color: $background-color-element;
+        height: 60px;
 
-            width: 30px;
-            height: 30px;
+        .header {
 
-            svg {
-              width: 30px;
-              height: 30px;
+            &__info {
+
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+
+                .info {
+
+                    &__image {
+                        border-radius: 25px;
+                        background-color: $background-color-element;
+
+                        width: 30px;
+                        height: 30px;
+
+                        svg {
+                            width: 30px;
+                            height: 30px;
+                        }
+                    }
+
+                    &__name {
+                        margin-left: 10px;
+
+                        font-size: $font-size-heading;
+                        font-weight: $font-weight-bold;
+                        color: $text-color-accent;
+                    }
+                }
             }
-          }
 
-          &__name {
-            margin-left: 10px;
+            &__settings {
+                margin-right: 30px;
 
-            font-size: $font-size-heading;
-            font-weight: $font-weight-bold;
-            color: $text-color-accent;
-          }
+                svg {
+                    height: 16px;
+                }
+            }
         }
-      }
+    }
 
-      &__settings {
-        margin-right: 30px;
+    &__main {
+        overflow-y: scroll;
 
-        svg {
-          height: 16px;
+        div {
+            height: calc(100vh - 150px);
         }
-      }
     }
-  }
-  &__main {
-    overflow-y: scroll;
-    div {
-      height: calc(100vh - 150px);
-    }
-  }
-  &__message-input {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    align-items: center;
+
+    &__message-input {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        align-items: center;
 
 
+        margin-left: 20px;
+        border-top: $background-color-element 1px solid;
+        padding-top: 10px;
+        padding-bottom: 10px;
 
-    margin-left: 20px;
-    border-top: $background-color-element 1px solid;
-    padding-top: 10px;
-    padding-bottom: 10px;
+        .message-input {
 
-    .message-input {
+            &__pin-file {
+            }
 
-      &__pin-file {
-      }
+            &__input {
+                border-radius: 30px;
+                border: none;
+                background: $background-color-element;
 
-      &__input {
-        border-radius: 30px;
-        border: none;
-        background: $background-color-element;
+                width: 90%;
+                height: 30px;
+            }
 
-        width: 90%;
-        height: 30px;
-      }
+            &__send-button {
+                display: block;
 
-      &__send-button {
-        display: block;
+                padding: 0;
+                margin-right: 20px;
+                border: none;
+                border-radius: 15px;
+                background: $theme-color-primary;
 
-        padding: 0;
-        margin-right: 20px;
-        border: none;
-        border-radius: 15px;
-        background: $theme-color-primary;
+                width: 27px;
+                height: 27px;
 
-        width: 27px;
-        height: 27px;
+                svg {
+                    padding-top: 2px;
 
-        svg {
-          width: 20px;
-          height: 20px;
+                    width: 20px;
+                    height: 20px;
 
-          fill: $text-color-theme-primary;
+                    fill: $text-color-theme-primary;
+                }
+            }
         }
-      }
     }
-  }
 }

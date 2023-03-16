@@ -1,0 +1,8 @@
+{
+    "extends": "airbnb",
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "hbs"],
+    "rules": {
+        "quotes": ["error", "single"]
+    }
+}
