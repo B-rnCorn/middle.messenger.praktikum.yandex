@@ -1,11 +1,14 @@
 import {Block} from "~/app/core/Block";
-import {submitHandler} from "~/app/core/submit-handler";
-//@ts-ignore
+import {submitHandler} from "~/app/core/SubmitHandler";
+//@ts-expect-error
 import template from "./ui/login-form.hbs";
 import {isValid} from "~/shared/helpers/validate-helpers";
 import {BlockEvents} from "~/app/core/types";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
+import AuthController from "~/app/core/controllers/AuthController";
+import {SigninData} from "~/app/core/api/AuthAPI";
+import withControllers from "~/app/core/providers/withControllers";
 
 export type LoginFormProps = {
     blockEvents: BlockEvents
@@ -15,7 +18,7 @@ export type LoginFormProps = {
     }
 }
 
-export class LoginForm extends Block<LoginFormProps> {
+class LoginForm extends Block<LoginFormProps> {
 
     submitHandler: typeof submitHandler;
 
@@ -23,14 +26,14 @@ export class LoginForm extends Block<LoginFormProps> {
         super.init();
 
         this.submitHandler = submitHandler;
-        this.submitHandler.subscribe('LoginFormSubmitted', this.navigate, this);
+        this.submitHandler.subscribe('LoginFormSubmitted', this.sendForm, this);
     }
 
     protected render(): DocumentFragment {
         return this.compile(template, this.blockProps);
     }
 
-    public navigate(): void {
+    public sendForm(): void {
         let isAllFieldsValid = true;
         // @ts-ignore
         this.children.loginFormItems.forEach((item: { getValue: () => string; blockProps: { inputFieldRegExpPattern: string; isMandatory: boolean; }; }) => {
@@ -39,8 +42,13 @@ export class LoginForm extends Block<LoginFormProps> {
             }
         })
         if (isAllFieldsValid) {
-            //@ts-ignore
-            window.navigateByRoutes('Chat');
+            // @ts-expect-error
+            const values = this.children.loginFormItems.map((item) => [(item as InputField).getName(), (item as InputField).getValue()]);
+            const data = Object.fromEntries(values) as SigninData;
+
+            this.blockProps.controllers.auth.signin(data);
         }
     }
 }
+
+export default withControllers(LoginForm, {auth: AuthController});

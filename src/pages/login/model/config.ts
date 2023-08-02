@@ -1,11 +1,13 @@
 import {Card} from "~/shared/card";
-import {LoginForm} from "~/widgets/login-form";
+import LoginForm from "~/widgets/login-form";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
 import {Input} from "~/shared/input-field/input";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
-import {submitHandler} from "~/app/core/submit-handler";
+import {submitHandler} from "~/app/core/SubmitHandler";
 import {LoginPageProps} from "~/pages/login";
+import {AltNav} from "~/shared/button/alt-nav";
+import {Router, Routes} from "~/app/core/router";
 
 export const loginConfig: LoginPageProps = {
     tagName: 'div',
@@ -71,8 +73,14 @@ export const loginConfig: LoginPageProps = {
                         loginFormButton: new Button({
                             blockPropsAndChildren: {
                                 buttonText: 'Авторизоваться',
-                                buttonAlternativeNavigationText: 'Нет аккаунта?',
-                                buttonAlternativeNavigationRoute: 'Registration',
+                                altNav: new AltNav({
+                                    blockEvents: {
+                                        click: () => Router.getInstance().go(Routes.Registration),
+                                    },
+                                    blockPropsAndChildren: {
+                                        buttonAlternativeNavigationText: 'Нет аккаунта?'
+                                    },
+                                }),
                                 buttonType: 'submit'
                             }
                         }),

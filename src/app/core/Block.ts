@@ -3,11 +3,11 @@ import EventBus from "~/app/core/EventBus";
 import {
     BlockChildren,
     BlockEvents,
-    BlockOwnProps,
+    BlockOwnProps, BlockProps,
     BlockPropsAndChildren,
     PropsDefaultFields
 } from "~/app/core/types";
-export abstract class Block<Props extends Record<string, any>> {
+export abstract class Block<Props extends BlockProps> {
     static EVENTS: Record<string, string> = {
         COMPONENT_DID_INIT: "component-did-init",
         COMPONENT_DID_MOUNT: "component-did-mount",
@@ -18,6 +18,7 @@ export abstract class Block<Props extends Record<string, any>> {
     public id: string | null = null;
     private _element: HTMLElement | null = null;
     //private _isNeedInternalId: boolean = false;
+    //@ts-expect-error пока что не требуется
     private _tagName: string = 'div';
     public blockEvents: BlockEvents = {};
     public blockProps: BlockOwnProps;
@@ -93,7 +94,7 @@ export abstract class Block<Props extends Record<string, any>> {
         });
     }
 
-// Может переопределять пользователь, необязательно трогать
+    //@ts-expect-error Может переопределять пользователь, необязательно трогать
     protected componentDidMount(oldProps: BlockOwnProps) {
     }
 
@@ -108,9 +109,9 @@ export abstract class Block<Props extends Record<string, any>> {
         }
     }
 
-// Может переопределять пользователь, необязательно трогать
+    // Может переопределять пользователь, необязательно трогать
     protected componentDidUpdate(oldProps: BlockOwnProps, newProps: BlockOwnProps) {
-        return true;
+        return true;//TODO: need debug deepEqual(oldProps, newProps);
     }
 
     public componentForceUpdate(): void {
@@ -118,11 +119,22 @@ export abstract class Block<Props extends Record<string, any>> {
     }
 
     setProps(nextProps: BlockOwnProps) {
+
         if (!nextProps) {
             return;
         }
 
         Object.assign(this.blockProps, nextProps);
+
+        this.eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, this.blockProps, this);
+    }
+
+    setChildProps(nextChildProps: BlockChildren) {
+        if (!nextChildProps) {
+            return;
+        }
+
+        Object.assign(this.children, nextChildProps);
 
         this.eventBus().emit(Block.EVENTS.COMPONENT_DID_UPDATE, this.blockProps, this);
     }
@@ -143,7 +155,7 @@ export abstract class Block<Props extends Record<string, any>> {
         this._addBlockEvents();
     }
 
-    protected abstract render(): DocumentFragment;
+    protected render(): DocumentFragment;
 
     public getContent(): HTMLElement | null  {
         return this.element;
@@ -220,8 +232,8 @@ export abstract class Block<Props extends Record<string, any>> {
         return element;
     }
 
-    public show() {
-        if (this._element !== null) this._element.style.display = 'block';
+    public show(displayType: string = 'block') {
+        if (this._element !== null) this._element.style.display = displayType;
     }
 
     public hide() {

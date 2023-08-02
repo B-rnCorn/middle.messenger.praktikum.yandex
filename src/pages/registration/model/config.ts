@@ -1,12 +1,13 @@
 import {Card} from "~/shared/card";
-import {RegistrationForm} from "~/widgets/registration-form";
+import RegistrationForm from "~/widgets/registration-form";
 import {InputField} from "~/shared/input-field";
 import {Input} from "~/shared/input-field/input";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
 import {Button} from "~/shared/button";
-import {submitHandler} from "~/app/core/submit-handler";
+import {submitHandler} from "~/app/core/SubmitHandler";
 import {RegistrationPageProps} from "~/pages/registration";
-
+import {AltNav} from "~/shared/button/alt-nav";
+import {Router, Routes} from "~/app/core/router";
 export const registrationConfig: RegistrationPageProps = {
     blockPropsAndChildren: {
         cardContent: new Card({
@@ -92,8 +93,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'second_name',
                                     inputFieldName: 'second_name',
                                     inputFieldLabel: 'Фамилия',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: regularExpressionPatterns.secondName,
+                                    inputFieldErrorText: regularExpressionValidationText.secondName,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -114,8 +115,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'phone',
                                     inputFieldName: 'phone',
                                     inputFieldLabel: 'Телефон',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: regularExpressionPatterns.phone,
+                                    inputFieldErrorText: regularExpressionValidationText.phone,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -136,8 +137,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'password',
                                     inputFieldName: 'password',
                                     inputFieldLabel: 'Пароль',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: regularExpressionPatterns.password,
+                                    inputFieldErrorText: regularExpressionValidationText.password,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -158,8 +159,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'password_repeat',
                                     inputFieldName: 'password_repeat',
                                     inputFieldLabel: 'Пароль ещё раз',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: regularExpressionPatterns.password,
+                                    inputFieldErrorText: regularExpressionValidationText.password,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -170,7 +171,7 @@ export const registrationConfig: RegistrationPageProps = {
                                             inputName: 'password_repeat',
                                             inputStatus: 'success',
                                             inputValue: '',
-                                            inputType: 'text',
+                                            inputType: 'password',
                                         }
                                     }),
                                 }
@@ -179,8 +180,14 @@ export const registrationConfig: RegistrationPageProps = {
                         registrationFormButton: new Button({
                             blockPropsAndChildren: {
                                 buttonText: 'Регистрация',
-                                buttonAlternativeNavigationText: 'Войти',
-                                buttonAlternativeNavigationRoute: 'Login',
+                                altNav: new AltNav({
+                                    blockEvents: {
+                                      click: () => Router.getInstance().go(Routes.Login),
+                                    },
+                                    blockPropsAndChildren: {
+                                        buttonAlternativeNavigationText: 'Войти'
+                                    },
+                                }),
                                 buttonType: 'submit',
                                 onClickAction: 'Login'
                             }

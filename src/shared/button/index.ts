@@ -1,7 +1,8 @@
 import {Block} from "~/app/core/Block";
-//@ts-ignore
+// @ts-expect-error
 import template from "./button.hbs";
 import {BlockEvents} from "~/app/core/types";
+import {AltNav} from "~/shared/button/alt-nav";
 
 type ButtonProps = {
     tagName?: string;
@@ -11,8 +12,7 @@ type ButtonProps = {
     blockPropsAndChildren: {
         buttonText: string,
         buttonValidationText?: string,
-        buttonAlternativeNavigationText?: string,
-        buttonAlternativeNavigationRoute?: string,
+        altNav: AltNav,
         buttonType: string,
         onClickAction?: string,
     }

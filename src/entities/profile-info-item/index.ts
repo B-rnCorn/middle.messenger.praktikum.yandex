@@ -1,5 +1,5 @@
 import {Block} from '~/app/core/Block';
-// @ts-ignore
+// @ts-expect-error
 import template from './ui/profile-info-item.hbs';
 
 export type ProfileInfoItemProps = {

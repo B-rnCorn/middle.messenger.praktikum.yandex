@@ -1,5 +1,5 @@
 import {Block} from '~/app/core/Block';
-// @ts-ignore
+// @ts-expect-error
 import template from './ui/error-server.hbs';
 import {ErrorPageContent} from "~/widgets/error-page-content";
 

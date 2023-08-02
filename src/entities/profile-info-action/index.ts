@@ -1,11 +1,12 @@
 import {Block} from '~/app/core/Block';
-// @ts-ignore
+// @ts-expect-error
 import template from './ui/profile-info-action.hbs';
+import {BlockEvents} from "~/app/core/types";
 
 export type ProfileInfoActionProps = {
+    blockEvents: BlockEvents,
     blockPropsAndChildren: {
         actionName: string,
-        route?: string,
     }
 }
 export class ProfileInfoAction extends Block<ProfileInfoActionProps> {

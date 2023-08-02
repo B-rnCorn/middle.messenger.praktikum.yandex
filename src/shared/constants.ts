@@ -1,9 +1,9 @@
 export const regularExpressionPatterns = {
-    firstName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)$',
-    secondName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)$',
-    displayName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)$',
+    firstName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)?$',
+    secondName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)?$',
+    displayName: '^[A-ZА-Я]{1}[a-zа-я]+?(-[A-ZА-Я]{1}[a-zа-я]+)?$',
     login: '^[a-z0-9_-]{6,20}$',
-    email: '^[\w-]+@([A-Za-z]+\.){1,2}[A-Za-z]+$',
+    email: '^[\\w-]+@([A-Za-z\\.]+){1,2}[A-Za-z]+$',
     password: '^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,40}$',
     phone: '^[\+]?[0-9]{10,15}$',
 }

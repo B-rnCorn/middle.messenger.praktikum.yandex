@@ -6,6 +6,7 @@ import {InputField} from "~/shared/input-field";
 import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
 import {Input} from "~/shared/input-field/input";
 import {ProfileEditProps} from "~/pages/profile-edit";
+import {Router, Routes} from "~/app/core/router";
 
 export const profileEditConfig: ProfileEditProps = {
     blockPropsAndChildren: {
@@ -150,6 +151,11 @@ export const profileEditConfig: ProfileEditProps = {
             }
         }),
         navigateBack: new NavigateBack({
+            blockEvents: {
+                click: function (): void {
+                    Router.getInstance().go(Routes.Profile);
+                }
+            },
             blockPropsAndChildren: {}
         }),
     }

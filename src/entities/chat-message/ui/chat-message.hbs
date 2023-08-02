@@ -1,0 +1,14 @@
+<div class="chat-message">
+    <div class="chat-message__content{{#if isMyMessage}}_my{{/if}}">
+        {{#unless isMyMessage}}
+            <span class="content__author">{{author}}</span>
+        {{/unless}}
+        <div class="content__text">
+            <p>{{content}}</p>
+            {{#if file}}
+                <img src="{{file}}" alt="*Не удалось загрузить изображение*" crossorigin="use-credentials">
+            {{/if}}
+        </div>
+        <span class="content__date">{{date}}</span>
+    </div>
+</div>

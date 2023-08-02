@@ -7,7 +7,7 @@ enum Methods {
 
 type Options = {
     headers?: Record<string, string>;
-    method: Methods;
+    method?: Methods;
     timeout?: number;
     retries?: number;
     data?: Data;
@@ -36,28 +36,40 @@ function queryStringify(data: Data): string {
     }
 }
 
-export type HTTPMethod = (
-    url: string,
-    options: Options,
-) => Promise<unknown>
+export class HTTPTransport {
 
-class HTTPTransport {
-    get: HTTPMethod = (url, options) => (this.request(options.data ? `${url}${queryStringify(options.data)}` : url, {
-        ...options,
-        method: Methods.GET
-    }, options.timeout));
+    private readonly endpoint: string;
 
-    post: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.POST}, options.timeout));
+    constructor(endpoint: string) {
+        this.endpoint = endpoint;
+    }
 
-    put: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.PUT}, options.timeout));
+    get<Response>(url: string , options: Options = {data: {}, method: Methods.GET}): Promise<Response>  {
+        return this.request<Response>(options.data ? `${this.endpoint}/${url}${queryStringify(options.data)}` : url, {
+            ...options,
+            method: Methods.GET
+        })
+    };
 
-    delete: HTTPMethod = (url, options) => (this.request(url, {...options, method: Methods.DELETE}, options.timeout));
+    post<Response = void>(url: string, options?: Options): Promise<Response> {
+        return this.request(`${this.endpoint}/${url}`, {...options, method: Methods.POST});
+    }
 
-    request = (url: string, options: Options, timeout = 5000) => {
-        const {method, data = {}, headers = {}} = options;
+    put<Response = void>(url: string, options?: Options): Promise<Response> {
+        return this.request(`${this.endpoint}/${url}`, {...options, method: Methods.PUT});
+    }
+
+    delete<Response = void>(url: string, options? : Options): Promise<Response> {
+        return this.request(`${this.endpoint}/${url}`, {...options, method: Methods.DELETE});
+    }
+
+    request<Response>(url: string, options: Options): Promise<Response> {
+        const {method = Methods.GET, data = {}, headers = {'Content-Type': 'application/json'}, timeout = 5000} = options;
 
         return new Promise((resolve, reject) => {
             const xhr = new XMLHttpRequest();
+
+            xhr.withCredentials = true;
 
             xhr.open(method, url);
 
@@ -70,7 +82,10 @@ class HTTPTransport {
             xhr.timeout = timeout ? timeout : 5000;
 
             xhr.onload = function () {
-                resolve(xhr);
+                if (typeof xhr.response === 'string')
+                    resolve(JSON.parse(xhr.response));
+                else
+                    resolve(xhr.response);
             }
             xhr.ontimeout = reject;
             xhr.onabort = reject;
@@ -85,7 +100,7 @@ class HTTPTransport {
     };
 }
 
-function fetchWithRetry(url: string, options: Options) {
+export function fetchWithRetry(endpoint: string, url: string, options: Options) {
     const {retries = 2, ...requestOptions} = options;
 
     function onRequestFailed() {
@@ -95,5 +110,5 @@ function fetchWithRetry(url: string, options: Options) {
         return this.fetchWithRetry(url, {...requestOptions, ...{retries: retries - 1}});
     }
 
-    return new HTTPTransport().request(url, requestOptions).catch(onRequestFailed);
+    return new HTTPTransport(endpoint).request(url, requestOptions).catch(onRequestFailed);
 }

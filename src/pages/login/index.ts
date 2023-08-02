@@ -1,5 +1,5 @@
 import {Block} from "~/app/core/Block";
-//@ts-ignore
+// @ts-expect-error
 import template from "./ui/login.hbs";
 import {BlockPropsAndChildren} from "~/app/core/types";
 

@@ -38,7 +38,23 @@ h3 {
 
 @import '../entities/chat-list-item/ui/chat-list-item';
 
+@import '../features/profile-navigate-button/ui/profile-navigate-button';
+
+@import '../entities/chat-search/ui/chat-search';
+
 @import '../widgets/chat-content/ui/chat-content';
+
+@import '../features/message-form/ui/message-form';
+
+@import '../entities/chat-message/ui/chat-message';
+
+@import '../entities/menu-item/ui/menu-item';
+
+@import '../features/user-list/ui/user-list';
+
+@import '../entities/user-list-item/ui/user-list-item';
+
+@import '../shared/search-select/ui/search-select';
 
 @import '../pages/login/ui/login';
 
@@ -77,3 +93,7 @@ h3 {
 @import '../shared/input-field/input-field';
 
 @import '../shared/button/button';
+
+@import '../widgets/create-chat-modal-window/ui/create-chat-modal-window';
+
+@import '../widgets/edit-chat-members-modal/ui/edit-chat-members-modal';

@@ -1,5 +1,5 @@
 import {Block} from '~/app/core/Block';
-// @ts-ignore
+// @ts-expect-error
 import template from './ui/load-file.hbs';
 import {Button} from "~/shared/button";
 

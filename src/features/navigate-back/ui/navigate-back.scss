@@ -1,20 +1,22 @@
 .navigate-back-button {
-  display: block;
+    display: block;
 
-  padding: 0;
-  border: none;
-  border-radius: 15px;
-  background: $theme-color-primary;
+    padding: 0;
+    border: none;
+    border-radius: 15px;
+    background: $theme-color-primary;
 
-  width: 27px;
-  height: 27px;
+    width: 27px;
+    height: 27px;
 
-  svg {
-    padding-top: 2px;
+    cursor: pointer;
 
-    width: 20px;
-    height: 20px;
+    svg {
+        padding-top: 2px;
 
-    fill: $text-color-theme-primary;
-  }
+        width: 20px;
+        height: 20px;
+
+        fill: $text-color-theme-primary;
+    }
 }

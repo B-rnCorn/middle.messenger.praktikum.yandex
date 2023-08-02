@@ -1,76 +1,59 @@
 import * as images from "~/images/image-urls";
 import {ProfileInformation} from "~/widgets/profile-information";
-import {ProfileInfoItem} from "~/entities/profile-info-item";
 import {ProfileInfoAction} from "~/entities/profile-info-action";
 import {NavigateBack} from "~/features/navigate-back";
-import {ProfileProps} from "~/pages/profile";
+import {ProfilePageProps} from "~/pages/profile";
+import {Router, Routes} from "~/app/core/router";
+import AuthController from "~/app/core/controllers/AuthController";
 
-export const profileConfig: ProfileProps = {
+export const profileConfig: ProfilePageProps = {
     blockPropsAndChildren: {
         profileInformation: new ProfileInformation({
             blockPropsAndChildren: {
                 nameInChat: 'Имя в чате',
                 imageUrl: images.chatImageUrl.toString(),
-                profileInfoItems: [
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Почта',
-                            itemValue: 'example@mailbox.com',
-                        }
-                    }),
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Логин',
-                            itemValue: 'examplelogin',
-                        }
-                    }),
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Имя',
-                            itemValue: 'Имя',
-                        }
-                    }),
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Фамилия',
-                            itemValue: 'Фамилия',
-                        }
-                    }),
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Имя в чате',
-                            itemValue: 'Имя в чате',
-                        }
-                    }),
-                    new ProfileInfoItem({
-                        blockPropsAndChildren: {
-                            itemName: 'Телефон',
-                            itemValue: '+7 (909) 967 30 30',
-                        }
-                    }),
-                ],
+                profileInfoItems: [],
                 profileInfoActions: [
                     new ProfileInfoAction({
+                        blockEvents: {
+                            click: function (): void {
+                                Router.getInstance().go(Routes.ProfileEdit);
+                            }
+                        },
                         blockPropsAndChildren: {
                             actionName: 'Изменить данные',
-                            route: 'ProfileEdit'
                         }
                     }),
                     new ProfileInfoAction({
+                        blockEvents: {
+                            click: function (): void {
+                                Router.getInstance().go(Routes.ProfileEdit);
+                            }
+                        },
                         blockPropsAndChildren: {
                             actionName: 'Изменить пароль',
                         }
                     }),
                     new ProfileInfoAction({
+                        blockEvents: {
+                            click: function (): void {
+                                AuthController.logout();
+                                Router.getInstance().go(Routes.Login);
+                            }
+                        },
                         blockPropsAndChildren: {
                             actionName: 'Выйти',
-                            route: 'Login'
                         }
                     })
                 ]
             }
         }),
         navigateBack: new NavigateBack({
+            blockEvents: {
+                click: function (): void {
+                    Router.getInstance().go(Routes.Chat);
+                }
+            },
             blockPropsAndChildren: {}
         }),
     }
