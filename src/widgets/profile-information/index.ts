@@ -6,6 +6,7 @@ import {ProfileInfoAction} from "~/entities/profile-info-action";
 import store from "~/app/core/store/Store";
 import {LOCALIZED_FIELD_NAMES, USER_FIELDS_NAMES} from "~/widgets/profile-information/constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
+import * as images from "~/images/image-urls";
 
 export type ProfileInformationProps = {
     blockPropsAndChildren: {
@@ -18,20 +19,22 @@ export type ProfileInformationProps = {
 
 export class ProfileInformation extends Block<ProfileInformationProps> {
 
-    submitHandler: typeof submitHandler;
-
     protected init() {
         super.init();
 
-        this.submitHandler = submitHandler;
-
-        this.submitHandler.subscribe('NavigateToProfile', this.componentForceUpdate, this);
+        submitHandler.subscribe('NavigateToProfile', this.setChildAndProps, this);
+        setTimeout(()=> submitHandler.publish('NavigateToProfile'), 1000);
     }
     protected render(): DocumentFragment {
+        return this.compile(template, this.blockProps);
+    }
+
+    protected setChildAndProps () {
         const userInfo = store.getState().user;
 
         if (userInfo) {
 
+            this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : images.chatImageUrl.toString();
             //@ts-expect-error
             this.children.profileInfoItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {
@@ -44,8 +47,8 @@ export class ProfileInformation extends Block<ProfileInformationProps> {
                     });
                 }
             })?.filter(item => item !== undefined) ?? [];
-        }
 
-        return this.compile(template, this.blockProps);
+            this.componentForceUpdate();
+        }
     }
 }

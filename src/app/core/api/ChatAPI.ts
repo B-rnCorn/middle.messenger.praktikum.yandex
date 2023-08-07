@@ -1,5 +1,6 @@
 import {BaseAPI} from "~/app/core/api/utils";
 import {UserData} from "~/app/core/api/AuthAPI";
+import {BASE_URL} from "~/app/core/api/constants";
 
 export interface ChatData {
     id: number,
@@ -32,9 +33,11 @@ export type AddUserToChatData = {
 
 export type DeleteUserFromChat = AddUserToChatData;
 
+export type ChangeChatAvtarRequest = FormData;
+
 export class ChatAPI extends BaseAPI {
     constructor() {
-        super('https://ya-praktikum.tech/api/v2/chats');
+        super(BASE_URL + '/chats');
     }
 
     fetchChats() {
@@ -59,6 +62,10 @@ export class ChatAPI extends BaseAPI {
 
     deleteUserFromChat(data: AddUserToChatData) {
         return this.http.delete<void>('users', {data});
+    }
+
+    changeChatAvatar(data: ChangeChatAvtarRequest) {
+        return this.http.put<void>('avatar', {data, headers: {}, timeout: 15000});
     }
 
     getToken(id: number): Promise<{token: string}> {

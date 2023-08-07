@@ -3,7 +3,7 @@ import {ChatAPI, CreateChatData} from "~/app/core/api";
 import {submitHandler} from "~/app/core/SubmitHandler";
 import {ErrorResponse} from "~/app/core/types";
 import MessagesController from "~/app/core/controllers/MessagesController";
-import {AddUserToChatData} from "~/app/core/api/ChatAPI";
+import {AddUserToChatData, ChangeChatAvtarRequest, DeleteUserFromChat} from "~/app/core/api/ChatAPI";
 
 class ChatController {
     private api: ChatAPI;
@@ -30,7 +30,7 @@ class ChatController {
 
     async getChatUsers(selectedChatId: number) {
         try {
-            store.set('selectedChatUsers', []);
+            store.set('selectedChatUsers', undefined);
             const users = await this.api.getChatUsers(selectedChatId);
             store.set('selectedChatUsers', users);
         } catch (e) {
@@ -41,14 +41,27 @@ class ChatController {
     async addUsersToChat(data: AddUserToChatData) {
         try {
             await this.api.addUserToChat(data);
+            await this.getChatUsers(data.chatId);
+            submitHandler.publish('ChatMembersListUpdate');
         } catch (e) {
             console.log(`!!!ERROR: ${e}`);
         }
     }
 
-    async deleteUserFromChat(data: AddUserToChatData) {
+    async deleteUserFromChat(data: DeleteUserFromChat) {
         try {
             await this.api.deleteUserFromChat(data);
+            await this.getChatUsers(data.chatId);
+            submitHandler.publish('ChatMembersListUpdate');
+        } catch (e) {
+            console.log(`!!!ERROR: ${e}`);
+        }
+    }
+
+    async changeChatAvatar(data: ChangeChatAvtarRequest) {
+        try {
+            await this.api.changeChatAvatar(data);
+            await this.fetchChats();
         } catch (e) {
             console.log(`!!!ERROR: ${e}`);
         }

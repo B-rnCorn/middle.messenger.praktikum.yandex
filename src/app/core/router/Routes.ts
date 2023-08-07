@@ -12,10 +12,10 @@ import {ProfileEdit} from "~/pages/profile-edit";
 import {profileEditConfig} from "~/pages/profile-edit/model/config";
 
 export const enum Routes {
-    Login = '/login',
-    Registration = '/registration',
-    Chat = '/chat',
-    Profile = '/profile',
+    Login = '/',
+    Registration = '/sign-up',
+    Chat = '/messenger',
+    Profile = '/settings',
     ProfileEdit = '/profile-edit',
     ErrorNotFound = '/error-not-found',
     ErrorServer = '/error-server',

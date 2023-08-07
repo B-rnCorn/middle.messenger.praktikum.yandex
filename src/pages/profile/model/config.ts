@@ -5,6 +5,7 @@ import {NavigateBack} from "~/features/navigate-back";
 import {ProfilePageProps} from "~/pages/profile";
 import {Router, Routes} from "~/app/core/router";
 import AuthController from "~/app/core/controllers/AuthController";
+import {submitHandler} from "~/app/core/SubmitHandler";
 
 export const profileConfig: ProfilePageProps = {
     blockPropsAndChildren: {
@@ -17,6 +18,7 @@ export const profileConfig: ProfilePageProps = {
                     new ProfileInfoAction({
                         blockEvents: {
                             click: function (): void {
+                                setTimeout(()=> submitHandler.publish('NavigateToProfileEdit'), 1000);
                                 Router.getInstance().go(Routes.ProfileEdit);
                             }
                         },

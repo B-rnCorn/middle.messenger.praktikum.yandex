@@ -3,7 +3,7 @@ import LoginForm from "~/widgets/login-form";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
 import {Input} from "~/shared/input-field/input";
-import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
+import {REGULAR_EXPRESSION_PATTERNS, REGULAR_EXPRESSION_VALIDATION_TEXT} from "~/shared/constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
 import {LoginPageProps} from "~/pages/login";
 import {AltNav} from "~/shared/button/alt-nav";
@@ -30,8 +30,8 @@ export const loginConfig: LoginPageProps = {
                                     inputFieldId: 'login',
                                     inputFieldName: 'login',
                                     inputFieldLabel: 'Логин',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.login,
-                                    inputFieldErrorText: regularExpressionValidationText.login,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.login,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.login,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -52,8 +52,8 @@ export const loginConfig: LoginPageProps = {
                                     inputFieldId: 'password',
                                     inputFieldName: 'password',
                                     inputFieldLabel: 'Пароль',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.password,
-                                    inputFieldErrorText: regularExpressionValidationText.password,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.password,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.password,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,

@@ -12,7 +12,7 @@ type ButtonProps = {
     blockPropsAndChildren: {
         buttonText: string,
         buttonValidationText?: string,
-        altNav: AltNav,
+        altNav?: AltNav,
         buttonType: string,
         onClickAction?: string,
     }

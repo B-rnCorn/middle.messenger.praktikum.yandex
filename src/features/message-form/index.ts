@@ -6,6 +6,7 @@ import { submitHandler } from "~/app/core/SubmitHandler";
 import {Input} from "~/shared/input";
 import MessagesController from "~/app/core/controllers/MessagesController";
 import store from "~/app/core/store/Store";
+import {isEmpty} from "~/shared/helpers/utils-helpers";
 
 export type MessageFormProps = {
     blockEvents: BlockEvents,
@@ -34,7 +35,7 @@ export class MessageForm extends Block<MessageFormProps> {
         let messageText = this.getMessageText();
         const selectedChatId = store.getState().selectedChatId;
 
-        selectedChatId && MessagesController.sendMessage(selectedChatId, messageText);
+        selectedChatId && !isEmpty(messageText) && MessagesController.sendMessage(selectedChatId, messageText);
 
         this.clearMessageText();
     }

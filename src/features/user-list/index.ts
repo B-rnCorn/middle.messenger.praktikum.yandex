@@ -35,7 +35,7 @@ export class UserList extends Block<UserListProps> {
                         }
                     },
                     blockPropsAndChildren: {
-                        text: `${user.login} : ${user.first_name} ${user.second_name}`,
+                        text: `${user.login} ${user.display_name ? ' ('+ user.display_name + ')' : ''} : ${user.first_name} ${user.second_name}`,
                         userId: user.id
                     }
                 });

@@ -8,7 +8,7 @@ interface State {
     user?: UserData | undefined;
     chats?: ChatData[];
     selectedChatId?: number;
-    selectedChatUsers?: ChatUserInfo[];
+    selectedChatUsers?: ChatUserInfo[] | undefined;
     searchedUsers?: UserData[];
     searchedUsersForAdd?: UserData[];
     selectedChatMessages?: Record<number, Message[]>;

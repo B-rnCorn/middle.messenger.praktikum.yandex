@@ -41,7 +41,7 @@ window.addEventListener('DOMContentLoaded', async () => {
             throw Error("Пользователь не авторизован");
         }
         router.start();
-        router.go(Routes.Chat);
+        //router.go(Routes.Chat);
     } catch (e) {
         router.start();
         if (isProtectedRoute) {

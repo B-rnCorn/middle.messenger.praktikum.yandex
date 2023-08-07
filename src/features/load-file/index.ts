@@ -2,14 +2,16 @@ import {Block} from '~/app/core/Block';
 // @ts-expect-error
 import template from './ui/load-file.hbs';
 import {Button} from "~/shared/button";
+import {BlockEvents} from "~/app/core/types";
+import {Input} from "~/shared/input";
 
 export type LoadFileProps = {
+    blockEvents: BlockEvents,
     blockPropsAndChildren: {
-        inputFieldId: string,
-        inputFieldName: string,
         inputFieldLabel: string,
-        inputFieldType: string,
-        submitButton: Button
+        inputFieldId: string,
+        inputField: Input,
+        submitButton: Button,
     }
 }
 

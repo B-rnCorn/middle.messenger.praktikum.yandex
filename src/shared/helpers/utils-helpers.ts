@@ -59,3 +59,7 @@ export function set(object: Indexed | unknown, path: string, value: unknown): In
 
     return merge(object as Indexed, result);
 }
+
+export function isEmpty(value: string | null | undefined) {
+    return !value && value === '';
+}

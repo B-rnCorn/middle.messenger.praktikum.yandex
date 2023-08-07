@@ -1,10 +1,7 @@
-<form class="load-file" onsubmit="preventDefaultEvent(event)">
+<form class="load-file">
     <label class="load-file__input-label" for="{{inputFieldId}}">
         {{inputFieldLabel}}
-        <input
-                id="{{inputFieldId}}"
-                name="{{inputFieldName}}"
-                type="{{inputFieldType}}">
+        {{{inputField}}}
     </label>
     <div class="load-file__drop-zone">
         Или перетащите файл в эту область

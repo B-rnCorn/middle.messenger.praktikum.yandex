@@ -7,6 +7,7 @@ import {submitHandler} from "~/app/core/SubmitHandler";
 import store from "~/app/core/store/Store";
 import MessagesController from "~/app/core/controllers/MessagesController";
 import {MenuItem} from "~/entities/menu-item";
+import * as images from "~/images/image-urls";
 
 export type ChatContentProps = {
     blockPropsAndChildren: {
@@ -24,14 +25,20 @@ export class ChatContent extends Block<ChatContentProps> {
         super.init();
 
         submitHandler.subscribe('ChatSelected', this.selectedChatUpdate, this);
-        submitHandler.subscribe('MessagesUpdate', this.componentForceUpdate, this);
+        submitHandler.subscribe('MessagesUpdate', this.setChildAndProps, this);
     }
 
     protected render(): DocumentFragment {
+        return this.compile(template, this.blockProps);
+    }
+
+    protected setChildAndProps(): void {
         const selectedChatId = store.getState().selectedChatId;
         const selectedChatMessages = store.getState().selectedChatMessages;
+        const chat = store.getState().chats?.find(chat => chat.id === selectedChatId);
 
         if (selectedChatId && selectedChatMessages && selectedChatMessages[selectedChatId]) {
+            if (chat) this.blockProps.imageUrl = chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : images.chatImageUrl.toString();
             this.children.chatMessages = selectedChatMessages[selectedChatId].map(item =>
                 new ChatMessage({
                     blockPropsAndChildren: {
@@ -41,11 +48,10 @@ export class ChatContent extends Block<ChatContentProps> {
                         date: `${new Date(item.time).getHours()}:${new Date(item.time).getMinutes()}`,
                     }
                 })) ?? [];
+            this.componentForceUpdate();
         } else {
             this.children.chatMessages = [];
         }
-
-        return this.compile(template, this.blockProps);
     }
 
     private selectedChatUpdate(): void {

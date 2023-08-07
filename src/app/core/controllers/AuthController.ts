@@ -3,6 +3,7 @@ import store from "~/app/core/store/Store";
 import {Router, Routes} from "~/app/core/router";
 import MessagesController from "~/app/core/controllers/MessagesController";
 import {ChangeUserProfileRequestData, SearchUsersRequest} from "~/app/core/api/AuthAPI";
+import {submitHandler} from "~/app/core/SubmitHandler";
 
 class AuthController {
     private api: AuthAPI;
@@ -56,6 +57,17 @@ class AuthController {
         try {
             await this.api.updateUserInfo(info);
             await this.fetchUser();
+            submitHandler.publish('NavigateToProfileEdit');
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async updateUserAvatar(data: FormData) {
+        try {
+            await this.api.updateUserAvatar(data);
+            await this.fetchUser();
+            submitHandler.publish('NavigateToProfileEdit');
         } catch (e) {
             console.error(e);
         }

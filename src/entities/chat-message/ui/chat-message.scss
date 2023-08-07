@@ -36,12 +36,15 @@
             color: $text-color-accent;
 
             .content {
-                &__author{
+
+                &__author {
                     font-size: $font-size-heading;
                     font-weight: bold;
                 }
-                &__text{
+
+                &__text {
                     font-size: $font-size-default;
+
                     img {
                         margin: 10px;
 
@@ -49,6 +52,7 @@
                         max-height: 100px;
                     }
                 }
+
                 &__date {
                     font-size: $font-size-small;
                 }
@@ -56,12 +60,14 @@
         }
 
         .content {
-            &__author{
+            &__author {
                 font-size: $font-size-heading;
                 font-weight: bold;
             }
-            &__text{
+
+            &__text {
                 font-size: $font-size-default;
+
                 img {
                     margin: 10px;
 
@@ -69,6 +75,7 @@
                     max-height: 100px;
                 }
             }
+
             &__date {
                 font-size: $font-size-small;
             }

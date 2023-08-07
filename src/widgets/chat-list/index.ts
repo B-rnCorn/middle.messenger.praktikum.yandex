@@ -36,7 +36,7 @@ export class ChatList extends Block<ChatListProps> {
                         }
                     },
                     blockPropsAndChildren: {
-                        imageUrl: images.chatImageUrl.toString(),
+                        imageUrl: chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : images.chatImageUrl.toString(),
                         name: chat.title,
                         lastMessage: chat.last_message?.content ?? '',
                         lastMessageTime: chat.last_message?.time ? `${new Date(chat.last_message.time).getHours()}:${new Date(chat.last_message.time).getMinutes()}` :'',

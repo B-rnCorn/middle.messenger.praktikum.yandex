@@ -36,6 +36,9 @@ function queryStringify(data: Data): string {
     }
 }
 
+//Пока что при переходе на типизацию вида get:HTTPMethod ломается слишком много)
+//type HTTPMethod<Response> = (url: string, options: Options) => Promise<Response>
+
 export class HTTPTransport {
 
     private readonly endpoint: string;
@@ -82,8 +85,8 @@ export class HTTPTransport {
             xhr.timeout = timeout ? timeout : 5000;
 
             xhr.onload = function () {
-                if (typeof xhr.response === 'string')
-                    resolve(JSON.parse(xhr.response));
+                if (typeof xhr.response === 'string' && xhr.response[0] === '{' || xhr.response[0] === '[')
+                    resolve(JSON.parse(xhr.response))
                 else
                     resolve(xhr.response);
             }
@@ -91,10 +94,14 @@ export class HTTPTransport {
             xhr.onabort = reject;
             xhr.onerror = reject;
 
-            if (method === Methods.GET || !data) {
-                xhr.send();
+            if (data instanceof FormData) {
+                xhr.send(data);
             } else {
-                xhr.send(JSON.stringify(data));
+                if (method === Methods.GET || !data) {
+                    xhr.send();
+                } else {
+                    xhr.send(JSON.stringify(data));
+                }
             }
         });
     };

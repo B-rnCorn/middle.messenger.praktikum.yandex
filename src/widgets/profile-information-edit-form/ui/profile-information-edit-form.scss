@@ -1,59 +1,61 @@
 .profile-form {
-  display: flex;
-  flex-direction: column;
-
-  width: 40%;
-
-  &__avatar-wrapper {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
 
-    width: 100%;
-  }
+    width: 40%;
 
-  &__avatar {
-    border-radius: 100px;
-    background-color: $background-color-element;
+    &__avatar-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
 
-    width: 130px;
-    height: 130px;
-
-    z-index: 1000;
-
-    &:after {
-      display: flex;
-      position: relative;
-      top: -130px;
-      justify-content: center;
-      align-items: center;
-
-      border-radius: 100px;
-      background:$background-color-shadow;
-
-      width: 130px;
-      height:130px;
-
-      color: $text-color-theme-primary;
-      content: 'Загрузить фото';
-      opacity: 0;
+        width: 100%;
     }
 
-    &:hover:after {
-      opacity: 0.5;
+    &__avatar {
+        border-radius: 100px;
+        background-color: $background-color-element;
+
+        width: 130px;
+        height: 130px;
+
+        z-index: 1000;
+
+        &:after {
+            display: flex;
+            position: relative;
+            top: -130px;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 100px;
+            background: $background-color-shadow;
+
+            width: 130px;
+            height: 30px;
+
+            color: $text-color-theme-primary;
+            content: 'Загрузить фото';
+            opacity: 0;
+
+            pointer-events: auto;
+        }
+
+        &:hover:after {
+            opacity: 0.5;
+        }
+
+        img {
+            width: 130px;
+            height: 130px;
+        }
     }
 
-    img {
-      width: 130px;
-      height: 130px;
+    &__button {
+        margin-top: 100px;
+        margin-bottom: 30px;
+
+        width: 100%;
     }
-  }
-
-  &__button {
-    margin-top: 100px;
-    margin-bottom: 30px;
-
-    width: 100%;
-  }
 }

@@ -1,4 +1,5 @@
 import {BaseAPI} from "~/app/core/api/utils";
+import {BASE_URL} from "~/app/core/api/constants";
 
 export interface SignupData {
     first_name: "string",
@@ -45,7 +46,7 @@ export interface SearchUsersRequest {
 
 export class AuthAPI extends BaseAPI {
     constructor() {
-        super('https://ya-praktikum.tech/api/v2/');
+        super(BASE_URL);
     }
 
     signup(data: SignupData) {
@@ -65,7 +66,11 @@ export class AuthAPI extends BaseAPI {
     }
 
     updateUserInfo(data: ChangeUserProfileRequestData) {
-        return this.http.post<void>('user', {data});
+        return this.http.put<void>('user/profile', {data});
+    }
+
+    updateUserAvatar(data: FormData) {
+        return this.http.put<void>('user/profile/avatar', {data, headers: {}, timeout: 15000});
     }
 
     searchUsers(data: SearchUsersRequest) {

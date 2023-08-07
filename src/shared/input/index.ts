@@ -8,8 +8,8 @@ type InputProps = {
     blockPropsAndChildren: {
         inputId: string,
         inputName: string,
-        inputStyleCLass: string,
-        inputValue: string,
+        inputStyleCLass?: string,
+        inputValue?: string,
         inputType: string,
     }
 }

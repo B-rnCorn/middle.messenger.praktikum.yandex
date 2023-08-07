@@ -38,11 +38,11 @@ export class EditChatMembersModal extends Block<EditChatMembersModalProps> {
         this.show('flex')
     }
 
-    protected searchMembersSubmitted(): void {
+    protected async searchMembersSubmitted(): Promise<void> {
         const login = (<HTMLInputElement> this.getContent()!.querySelector(`[name=${this.blockProps.inputFieldName}]`)).value;
 
         if (login) {
-            authController.searchUsers({login: login});
+            await authController.searchUsers({login: login});
             //@ts-expect-error костыль
             this.children.card.children.body[1].children.menuItems = store.getState().searchedUsersForAdd?.map(user => {
                return new MenuItem({
