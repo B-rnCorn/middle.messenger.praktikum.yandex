@@ -1,12 +1,13 @@
 import {Card} from "~/shared/card";
-import {RegistrationForm} from "~/widgets/registration-form";
+import RegistrationForm from "~/widgets/registration-form";
 import {InputField} from "~/shared/input-field";
 import {Input} from "~/shared/input-field/input";
-import {regularExpressionPatterns, regularExpressionValidationText} from "~/shared/constants";
+import {REGULAR_EXPRESSION_PATTERNS, REGULAR_EXPRESSION_VALIDATION_TEXT} from "~/shared/constants";
 import {Button} from "~/shared/button";
-import {submitHandler} from "~/app/core/submit-handler";
+import {submitHandler} from "~/app/core/SubmitHandler";
 import {RegistrationPageProps} from "~/pages/registration";
-
+import {AltNav} from "~/shared/button/alt-nav";
+import {Router, Routes} from "~/app/core/router";
 export const registrationConfig: RegistrationPageProps = {
     blockPropsAndChildren: {
         cardContent: new Card({
@@ -26,8 +27,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'email',
                                     inputFieldName: 'email',
                                     inputFieldLabel: 'Почта',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.email,
-                                    inputFieldErrorText: regularExpressionValidationText.email,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.email,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.email,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -48,8 +49,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'login',
                                     inputFieldName: 'login',
                                     inputFieldLabel: 'Логин',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.login,
-                                    inputFieldErrorText: regularExpressionValidationText.login,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.login,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.login,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -70,8 +71,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'first_name',
                                     inputFieldName: 'first_name',
                                     inputFieldLabel: 'Имя',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.firstName,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.firstName,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -92,8 +93,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'second_name',
                                     inputFieldName: 'second_name',
                                     inputFieldLabel: 'Фамилия',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.secondName,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.secondName,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -114,8 +115,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'phone',
                                     inputFieldName: 'phone',
                                     inputFieldLabel: 'Телефон',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.phone,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.phone,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -136,8 +137,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'password',
                                     inputFieldName: 'password',
                                     inputFieldLabel: 'Пароль',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.password,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.password,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -158,8 +159,8 @@ export const registrationConfig: RegistrationPageProps = {
                                     inputFieldId: 'password_repeat',
                                     inputFieldName: 'password_repeat',
                                     inputFieldLabel: 'Пароль ещё раз',
-                                    inputFieldRegExpPattern: regularExpressionPatterns.firstName,
-                                    inputFieldErrorText: regularExpressionValidationText.firstName,
+                                    inputFieldRegExpPattern: REGULAR_EXPRESSION_PATTERNS.password,
+                                    inputFieldErrorText: REGULAR_EXPRESSION_VALIDATION_TEXT.password,
                                     isInputFieldValid: true,
                                     isMandatory: true,
                                     isFormInput: true,
@@ -170,7 +171,7 @@ export const registrationConfig: RegistrationPageProps = {
                                             inputName: 'password_repeat',
                                             inputStatus: 'success',
                                             inputValue: '',
-                                            inputType: 'text',
+                                            inputType: 'password',
                                         }
                                     }),
                                 }
@@ -179,8 +180,14 @@ export const registrationConfig: RegistrationPageProps = {
                         registrationFormButton: new Button({
                             blockPropsAndChildren: {
                                 buttonText: 'Регистрация',
-                                buttonAlternativeNavigationText: 'Войти',
-                                buttonAlternativeNavigationRoute: 'Login',
+                                altNav: new AltNav({
+                                    blockEvents: {
+                                      click: () => Router.getInstance().go(Routes.Login),
+                                    },
+                                    blockPropsAndChildren: {
+                                        buttonAlternativeNavigationText: 'Войти'
+                                    },
+                                }),
                                 buttonType: 'submit',
                                 onClickAction: 'Login'
                             }

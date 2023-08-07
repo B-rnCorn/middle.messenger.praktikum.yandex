@@ -1,0 +1,17 @@
+.profile-navigate {
+    display: flex;
+    flex-direction: row;
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-right: 10px;
+
+    cursor: pointer;
+
+    svg {
+        width: 15px;
+        height: 17px;
+
+        fill: $text-color-default;
+    }
+}

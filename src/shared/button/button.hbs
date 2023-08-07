@@ -7,9 +7,8 @@
     >
         {{buttonText}}
     </button>
-    {{#if buttonAlternativeNavigationText}}
-        <nav class="button__alternative-navigation"
-             onclick="navigateByRoutes('{{buttonAlternativeNavigationRoute}}')">{{buttonAlternativeNavigationText}}</nav>
+    {{#if altNav}}
+        {{{altNav}}}
     {{/if}}
     {{#if buttonValidationText}}
         <div class="button__validation-text">{{buttonValidationText}}</div>

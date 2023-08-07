@@ -21,4 +21,9 @@ export enum PropsDefaultFields {
     ID = 'id',
     IS_NEED_INTERNAL_ID = 'isNeedInternalId',
     BLOCK_EVENTS = 'blockEvents',
+    CONTROLLERS = 'controllers',
+}
+
+export type ErrorResponse = {
+    reason: string;
 }

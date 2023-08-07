@@ -2,7 +2,7 @@ import {Block} from "~/app/core/Block";
 //@ts-ignore
 import template from "./input-field.hbs";
 import {isValid} from "~/shared/helpers/validate-helpers";
-import { submitHandler } from "~/app/core/submit-handler";
+import { submitHandler } from "~/app/core/SubmitHandler";
 import {BlockEvents} from "~/app/core/types";
 import {Input} from "~/shared/input-field/input";
 
@@ -69,5 +69,9 @@ export class InputField extends Block<InputFieldProps> {
 
     getValue(): string {
         return (<HTMLInputElement> this.getContent()!.querySelector(`[name=${this.blockProps.inputFieldName}]`)).value;
+    }
+
+    getName(): string {
+        return this.blockProps.inputFieldName;
     }
 }

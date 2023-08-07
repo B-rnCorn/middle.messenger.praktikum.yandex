@@ -1,0 +1,16 @@
+.user-list-menu-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    width: 400px;
+
+    cursor: pointer;
+
+    &:hover {
+
+        &::after {
+            color: $text-color-danger;
+            content: " Удалить"
+        }
+    }
+}

@@ -16,7 +16,7 @@
 
     z-index: 1000;
 
-    &:after {
+    /*&:after {
       display: flex;
       position: relative;
       top: -130px;
@@ -36,7 +36,7 @@
 
     &:hover:after {
       opacity: 0.5;
-    }
+    }*/
 
     img {
       width: 130px;
