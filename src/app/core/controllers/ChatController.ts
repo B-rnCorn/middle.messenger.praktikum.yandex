@@ -21,6 +21,7 @@ class ChatController {
                     await MessagesController.connect(chat.id, token);
                 }
             });
+            store.set('chats',undefined);
             store.set('chats',chats);
             submitHandler.publish('ChatListUpdated');
         } catch (e) {
@@ -72,6 +73,8 @@ class ChatController {
         try {
             await this.api.deleteChat(selectedChatId);
             store.set('selectedChatId', undefined);
+            submitHandler.publish('ChatSelected');
+            await this.fetchChats();
         } catch (e) {
             console.log(`!!!ERROR: ${e}`);
         }

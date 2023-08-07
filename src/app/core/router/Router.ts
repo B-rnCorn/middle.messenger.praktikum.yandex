@@ -2,6 +2,9 @@ import {Block} from "~/app/core/Block";
 import {Route} from "~/app/core/router/Route";
 import {BlockProps} from "~/app/core/types";
 import {Routes} from "~/app/core/router/Routes";
+import sessionStorageController from "~/app/core/controllers/SessionStorageController";
+
+const PATH_KEY = 'PATH';
 
 export class Router {
 
@@ -23,7 +26,13 @@ export class Router {
     start() {
         window.onpopstate = (event: PopStateEvent) => {
             //@ts-expect-error
-            this._onRoute(event.currentTarget.location.pathname);
+            if (event.currentTarget.location.pathname) {
+                //@ts-expect-error
+                this._onRoute(event.currentTarget.location.pathname);
+            } else {
+                //@ts-expect-error
+                this._onRoute(sessionStorageController.get(PATH_KEY) ?? Routes.Chat);
+            }
         };
 
         this._onRoute(window.location.pathname as Routes);
@@ -38,6 +47,7 @@ export class Router {
 
         if (route) {
             this.currentRoute = route;
+            sessionStorageController.set(PATH_KEY, pathname);
             route.render();
         }
     }

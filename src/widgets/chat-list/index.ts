@@ -21,11 +21,14 @@ export class ChatList extends Block<ChatListProps> {
     protected init() {
         super.init();
 
-        submitHandler.subscribe('ChatListUpdated', this.componentForceUpdate, this);
+        submitHandler.subscribe('ChatListUpdated', this.updatePropsAndChildren, this);
     }
 
     protected render(): DocumentFragment {
+        return this.compile(template, this.blockProps);
+    }
 
+    protected updatePropsAndChildren(): void {
         try {
             this.children.chatListItems = store.getState()?.chats?.map(chat => {
                 return new ChatListItem({
@@ -44,9 +47,9 @@ export class ChatList extends Block<ChatListProps> {
                     }
                 });
             }) ?? [];
+            this.componentForceUpdate();
         } catch (e) {
             console.log(e);
         }
-        return this.compile(template, this.blockProps);
     }
 }
