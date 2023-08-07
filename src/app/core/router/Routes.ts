@@ -33,21 +33,6 @@ export function createPageInstance(pathname: Routes) {
             return new ProfilePage(profileConfig);
         case Routes.ProfileEdit:
             return new ProfileEdit(profileEditConfig);
-        /*case Routes.Chat:
-            render(new ChatPage(chatConfig));
-            break;
-        case Routes.Profile:
-            render(new Profile(profileConfig));
-            break;
-        case Routes.ProfileEdit:
-            render(new ProfileEdit(profileEditConfig));
-            break;
-        case Routes.ErrorServer:
-            render(new ErrorServer(errorServerConfig));
-            break;
-        case Routes.ErrorNotFound:
-            render(new ErrorNotFound(errorNotFoundConfig));
-            break;*/
         default:
             return new ErrorNotFound(errorNotFoundConfig);
     }

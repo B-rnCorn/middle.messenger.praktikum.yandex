@@ -6,14 +6,13 @@ import sessionStorageController from "~/app/core/controllers/SessionStorageContr
 
 const PATH_KEY = 'PATH';
 
-export class Router {
+class Router {
 
     private routes: Route<any>[];
-    private history: History;
+    private history: History = window.history;
     private currentRoute: Route<any> | null;
     constructor() {
         this.routes = [];
-        this.history = window.history;
         this.currentRoute = null;
     }
 
@@ -71,6 +70,4 @@ export class Router {
     }
 }
 
-export namespace Router {
-
-}
+export default Router;

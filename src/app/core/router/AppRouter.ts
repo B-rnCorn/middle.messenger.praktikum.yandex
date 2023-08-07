@@ -1,4 +1,4 @@
-import {Router} from "~/app/core/router/Router";
+import Router from "~/app/core/router/Router";
 
 export class AppRouter {
     private static instance: Router;
