@@ -1,4 +1,3 @@
-import * as images from '~/images/image-urls';
 import {ChatList} from '~/widgets/chat-list';
 import {ChatContent} from "~/widgets/chat-content";
 import {ChatPageProps} from "~/pages/chat";
@@ -27,7 +26,7 @@ export const chatConfig: ChatPageProps = {
             blockPropsAndChildren: {
                 search: new ChatSearch({
                     blockPropsAndChildren: {
-                        searchIconUrl: images.chatSearchUrl.toString(),
+                        searchIconUrl: '',
                         addChatButton: new IconButton({
                             blockEvents: {
                                 click: function (): void {
@@ -35,7 +34,7 @@ export const chatConfig: ChatPageProps = {
                                 }
                             },
                             blockPropsAndChildren: {
-                                iconUrl: images.chatPlusUrl.toString(),
+                                iconUrl: 'https://icons8.com/icon/1501/plus',
                                 cssClassName: 'chat-search__plus-icon',
                                 altText: 'addChatIcon',
                             },
@@ -56,7 +55,7 @@ export const chatConfig: ChatPageProps = {
         }),
         activeChat: new ChatContent({
             blockPropsAndChildren: {
-                imageUrl: images.chatImageUrl.toString(),
+                imageUrl: 'https://icons8.com/icon/111473/person',
                 name: '',
                 chatMessages: [],
                 menuItems: [
@@ -147,7 +146,7 @@ export const chatConfig: ChatPageProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: images.closeCrossUrl.toString(),
+                                    iconUrl: '',
                                     altText: 'close_icon',
                                     cssClassName: 'create-chat-modal-window__close'
                                 }
@@ -202,7 +201,7 @@ export const chatConfig: ChatPageProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: images.closeCrossUrl.toString(),
+                                    iconUrl: '',
                                     altText: 'close_icon',
                                     cssClassName: 'edit-chat-members-modal__close'
                                 }

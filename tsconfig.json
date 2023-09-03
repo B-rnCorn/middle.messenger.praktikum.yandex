@@ -3,7 +3,7 @@
         "outDir": "./dist/",
         "target": "es2017",
         "declaration": false,
-        "module": "ESNext",
+        "module": "CommonJS",
         "moduleResolution": "Node",
         "noImplicitAny": true,
         "noUnusedLocals": true,

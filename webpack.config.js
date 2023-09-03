@@ -22,7 +22,10 @@ module.exports = {
   ],
   resolve: {
     plugins: [new TsconfigPathsPlugin({extensions: [".ts", ".js", ".json"]})],
-    extensions: [".ts", ".js", ".json"]
+    extensions: [".ts", ".js", ".json"],
+    alias: {
+      '~': path.resolve(__dirname, './src'),
+    },
   },
   module: {
     rules: [

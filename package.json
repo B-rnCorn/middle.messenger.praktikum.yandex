@@ -7,13 +7,14 @@
         "build": "node ./node_modules/.bin/webpack",
         "server": "node server.js",
         "start": "npm-run-all build server",
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "lint": "npm run lint --fix",
+        "test": "mocha --require ts-node/register --require tsconfig-paths/register --require ./mochaSetup.js \"./src/**/*.test.ts\"",
+        "lint-code": "npm run lint --fix",
         "lint-styles": "npx stylelint \"**/*.scss\" --fix",
         "prepare": "husky install"
     },
     "lint-staged": {
-        "*.scss": "lint"
+        "*.scss": "lint-styles",
+        "*.{ts,js}": "lint-code"
     },
     "repository": {
         "type": "git",
@@ -30,7 +31,7 @@
         "@types/handlebars": "4.1.0",
         "@types/jsdom": "21.1.2",
         "@types/mocha": "10.0.1",
-        "@types/sinon": "^10.0.16",
+        "@types/sinon": "10.0.16",
         "@types/uuid": "9.0.1",
         "chai": "4.3.8",
         "css-loader": "6.8.1",
@@ -57,6 +58,7 @@
         "stylelint-scss": "4.4.0",
         "ts-loader": "9.4.4",
         "ts-node": "10.9.1",
+        "tsconfig-paths": "^4.2.0",
         "tsconfig-paths-webpack-plugin": "4.1.0",
         "typescript": "4.9.5",
         "webpack": "5.88.2",

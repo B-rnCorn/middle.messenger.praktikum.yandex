@@ -1,13 +1,14 @@
 import {BlockProps} from "~/app/core/types";
-import {createPageInstance, Routes} from "~/app/core/router/Routes";
+import { Routes } from "~/app/core/router/Routes";
+import { Block } from "../Block";
 
 export class Route<Props extends BlockProps> {
 
     constructor(
         private _pathname: Routes,
-        //@ts-expect-error возможно понадобится, пока не юзается
         private _props: Props,
-        private _block: ReturnType<typeof createPageInstance>| null = null,
+        private _blockClass: typeof Block<BlockProps>,
+        private _block: Block<BlockProps> | null = null,
     ) {
     }
 
@@ -28,14 +29,14 @@ export class Route<Props extends BlockProps> {
 
     render(): void {
         if (!this._block) {
-            this._block = createPageInstance(this._pathname);
+            //@ts-expect-error
+            this._block = new this._blockClass(this._props);
             const app = document.querySelector("#app") as HTMLElement;
-            if (app && !!this._block?.getContent()) {
-                app.innerHTML = "";
-                //@ts-expect-error
-                app.appendChild(this._block.getContent());
-                this._block.dispatchComponentDidMount();
-            }
+            app.innerHTML = "";
+            //@ts-expect-error
+            app.appendChild(this._block.getContent());
+            //@ts-expect-error
+            this._block.dispatchComponentDidMount();
             return;
         }
 

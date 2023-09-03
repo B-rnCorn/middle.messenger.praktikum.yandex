@@ -1,4 +1,3 @@
-import * as images from "~/images/image-urls";
 import {NavigateBack} from "~/features/navigate-back";
 import {ProfileInformationEditForm} from "~/widgets/profile-information-edit-form";
 import {Button} from "~/shared/button";
@@ -29,7 +28,7 @@ export const profileEditConfig: ProfileEditProps = {
                         }
                     },
                     blockPropsAndChildren: {
-                        imageUrl: images.chatImageUrl.toString(),
+                        imageUrl: 'https://icons8.com/icon/111473/person',
                     }
                 }),
                 profileFormItems: [],
@@ -94,7 +93,7 @@ export const profileEditConfig: ProfileEditProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: images.closeCrossUrl.toString(),
+                                    iconUrl: 'https://icons8.com/icon/95834/multiply',
                                     altText: 'close_icon',
                                     cssClassName: 'load-file-modal-window__close'
                                 }

@@ -1,4 +1,3 @@
-import * as images from "~/images/image-urls";
 import {ProfileInformation} from "~/widgets/profile-information";
 import {ProfileInfoAction} from "~/entities/profile-info-action";
 import {NavigateBack} from "~/features/navigate-back";
@@ -12,7 +11,7 @@ export const profileConfig: ProfilePageProps = {
         profileInformation: new ProfileInformation({
             blockPropsAndChildren: {
                 nameInChat: 'Имя в чате',
-                imageUrl: images.chatImageUrl.toString(),
+                imageUrl: 'https://icons8.com/icon/111473/person',
                 profileInfoItems: [],
                 profileInfoActions: [
                     new ProfileInfoAction({

@@ -13,7 +13,6 @@ import {isValid} from "~/shared/helpers/validate-helpers";
 import authController from "~/app/core/controllers/AuthController";
 import {ChangeUserProfileRequestData} from "~/app/core/api/AuthAPI";
 import {ImgLoadIcon} from "~/shared/img-load-icon";
-import * as images from "~/images/image-urls";
 
 export type ProfileInformationEditFormProps = {
     blockEvents?: BlockEvents
@@ -40,7 +39,7 @@ export class ProfileInformationEditForm extends Block<ProfileInformationEditForm
 
         if (userInfo) {
             //@ts-expect-error
-            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : images.chatImageUrl.toString();
+            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://icons8.com/icon/111473/person';
             //@ts-expect-error
             this.children.profileFormItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {

@@ -19,6 +19,9 @@
         .search__icon {
             margin-left: 20px;
             margin-right: 10px;
+
+            max-width: 20px;
+            max-height: 20px;
         }
 
         .search__input {
@@ -30,7 +33,11 @@
     }
 
     &__plus-icon {
-        margin-right: 20px;
+        margin-right: auto;
+        margin-left: 20px;
+
+        max-width: 20px;
+        max-height: 20px;
 
         cursor: pointer;
     }

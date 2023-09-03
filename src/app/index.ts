@@ -17,14 +17,14 @@ import "./index.scss";
 window.addEventListener('DOMContentLoaded', async () => {
     const router = Router.getInstance();
     router
-        .use<LoginPage>(Routes.Login, new LoginPage(loginConfig))
-        .use<RegistrationPage>(Routes.Registration, new RegistrationPage(registrationConfig))
+        .use<LoginPage>(Routes.Login, LoginPage, loginConfig)
+        .use<RegistrationPage>(Routes.Registration, RegistrationPage, registrationConfig)
         //@ts-expect-error типизация выглядит правильной Component extends Block но ошибка :(
-        .use<typeof ChatPage>(Routes.Chat, new ChatPage(chatConfig))
+        .use<typeof ChatPage>(Routes.Chat, ChatPage, chatConfig)
         //@ts-expect-error -//-
-        .use<typeof ProfilePage>(Routes.Profile, new ProfilePage(profileConfig))
+        .use<typeof ProfilePage>(Routes.Profile, ProfilePage, profileConfig)
         //@ts-expect-error -//-
-        .use<typeof ProfileEdit>(Routes.ProfileEdit, new ProfileEdit(profileEditConfig));
+        .use<typeof ProfileEdit>(Routes.ProfileEdit, ProfileEdit, profileEditConfig);
 
     let isProtectedRoute;
     switch (window.location.pathname) {

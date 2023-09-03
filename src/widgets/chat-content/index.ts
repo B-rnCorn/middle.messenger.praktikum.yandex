@@ -6,7 +6,6 @@ import {submitHandler} from "~/app/core/SubmitHandler";
 import store from "~/app/core/store/Store";
 import MessagesController from "~/app/core/controllers/MessagesController";
 import {MenuItem} from "~/entities/menu-item";
-import * as images from "~/images/image-urls";
 
 export type ChatContentProps = {
     blockPropsAndChildren: {
@@ -37,7 +36,7 @@ export class ChatContent extends Block<ChatContentProps> {
         const chat = store.getState().chats?.find(chat => chat.id === selectedChatId);
 
         if (selectedChatId && selectedChatMessages && selectedChatMessages[selectedChatId]) {
-            if (chat) this.blockProps.imageUrl = chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : images.chatImageUrl.toString();
+            if (chat) this.blockProps.imageUrl = chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : 'https://icons8.com/icon/111473/person';
             this.children.chatMessages = selectedChatMessages[selectedChatId].map(item =>
                 new ChatMessage({
                     blockPropsAndChildren: {

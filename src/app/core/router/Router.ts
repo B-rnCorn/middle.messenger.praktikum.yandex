@@ -5,6 +5,7 @@ import {Routes} from "~/app/core/router/Routes";
 import sessionStorageController from "~/app/core/controllers/SessionStorageController";
 
 const PATH_KEY = 'PATH';
+const BlockClass = class extends Block<BlockProps>{};
 
 class Router {
 
@@ -16,14 +17,16 @@ class Router {
         this.currentRoute = null;
     }
 
-    use<BlockClass extends Block<BlockProps>>(pathname: Routes, block: BlockClass) {
-        const route = new Route<BlockProps>(pathname, block);
+    use<BlockClass extends Block<BlockProps>>(pathname: Routes, blockClass: typeof BlockClass, props: BlockProps, block?: BlockClass) {
+        const route = new Route<BlockProps>(pathname, props, blockClass, block);
         this.routes.push(route);
         return this;
     }
 
     start() {
         window.onpopstate = (event: PopStateEvent) => {
+            //@ts-ignore
+            console.log(event.currentTarget.location.pathname);
             //@ts-expect-error
             if (event.currentTarget.location.pathname) {
                 //@ts-expect-error
