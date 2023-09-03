@@ -7,7 +7,7 @@ import {BlockEvents} from "~/app/core/types";
 import store from "~/app/core/store/Store";
 import {LOCALIZED_FIELD_NAMES, USER_FIELDS_NAMES, INTERNAL_FIELD_NAMES} from "./constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
-import {Input} from "~/shared/input-field/input";
+import {Input} from "~/shared/controlled-input";
 import {REGULAR_EXPRESSION_PATTERNS, REGULAR_EXPRESSION_VALIDATION_TEXT} from "~/shared/constants";
 import {isValid} from "~/shared/helpers/validate-helpers";
 import authController from "~/app/core/controllers/AuthController";

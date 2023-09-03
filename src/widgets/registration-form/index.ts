@@ -6,9 +6,8 @@ import { submitHandler } from "~/app/core/SubmitHandler";
 import {BlockEvents} from "~/app/core/types";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
-import withControllers from "~/app/core/providers/withControllers";
-import AuthController from "~/app/core/controllers/AuthController";
 import {SignupData} from "~/app/core/api/AuthAPI";
+import authController from "~/app/core/controllers/AuthController";
 
 export type RegistrationFormProps = {
     blockEvents: BlockEvents
@@ -22,17 +21,14 @@ class RegistrationForm extends Block<RegistrationFormProps> {
     submitHandler: typeof submitHandler;
 
     protected init() {
-        super.init();
-
-        this.submitHandler = submitHandler;
-        this.submitHandler.subscribe('RegistrationFormSubmitted', this.sendForm, this);
+        submitHandler.subscribe('RegistrationFormSubmitted', this.sendForm, this);
     }
 
     protected render(): DocumentFragment {
         return  this.compile(template, this.blockProps);
     }
 
-    public sendForm(): void {
+    public async sendForm(): Promise<void> {
         let isAllFieldsValid = true;
         // @ts-ignore
         this.children.registrationFormItems.forEach((item: { getValue: () => string; blockProps: { inputFieldRegExpPattern: string; isMandatory: boolean; }; }) => {
@@ -45,9 +41,9 @@ class RegistrationForm extends Block<RegistrationFormProps> {
             const values = this.children.registrationFormItems.filter(item => (item as InputField).getName() !== 'password_repeat').map((item) => [(item as InputField).getName(), (item as InputField).getValue()]);
             const data = Object.fromEntries(values) as SignupData;
 
-            this.blockProps.controllers.auth.signup(data);
+            await authController.signup(data);
         }
     }
 }
 
-export default withControllers(RegistrationForm, {auth: AuthController});
+export default RegistrationForm;

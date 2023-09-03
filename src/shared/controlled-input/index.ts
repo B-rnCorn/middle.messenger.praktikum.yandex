@@ -1,5 +1,4 @@
 import {Block} from "~/app/core/Block";
-//@ts-ignore
 import template from "./input.hbs";
 import {BlockEvents} from "~/app/core/types";
 

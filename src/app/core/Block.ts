@@ -1,3 +1,4 @@
+import { TemplateDelegate } from 'handlebars';
 import {v4 as generateUUID} from 'uuid';
 import EventBus from "~/app/core/EventBus";
 import {
@@ -23,11 +24,9 @@ export abstract class Block<Props extends BlockProps> {
     public blockEvents: BlockEvents = {};
     public blockProps: BlockOwnProps;
     protected children: BlockChildren;
-    public eventBus: () => EventBus;
+    protected eventBus: () => EventBus;
 
     constructor({tagName, blockPropsAndChildren = {}, isNeedInternalId = true, blockEvents = {}}: Props) {
-
-        const eventBus = new EventBus();
 
         const {children, props } = this.splitPropsAndChildren(blockPropsAndChildren);
 
@@ -41,6 +40,8 @@ export abstract class Block<Props extends BlockProps> {
         }
 
         this.blockProps = this._makePropsProxy(isNeedInternalId ? {...props, id: this.id} : {...props});
+
+        const eventBus = new EventBus();
 
         this.eventBus = () => eventBus;
 
@@ -64,7 +65,7 @@ export abstract class Block<Props extends BlockProps> {
     }
 
     private _registerLifecycleEvents(eventBus: EventBus) {
-        eventBus.on(Block.EVENTS.COMPONENT_DID_INIT, this.init.bind(this));
+        eventBus.on(Block.EVENTS.COMPONENT_DID_INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.COMPONENT_DID_MOUNT, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.COMPONENT_DID_RENDER, this._render.bind(this));
         eventBus.on(Block.EVENTS.COMPONENT_DID_UPDATE, this._componentDidUpdate.bind(this));
@@ -82,8 +83,13 @@ export abstract class Block<Props extends BlockProps> {
         });
     }
 
-    protected init() {
+    private _init() {
+        this.init();
+
         this.eventBus().emit(Block.EVENTS.COMPONENT_DID_RENDER);
+    }
+
+    protected init() {
     }
 
     private _componentDidMount() {
@@ -110,6 +116,7 @@ export abstract class Block<Props extends BlockProps> {
     }
 
     // Может переопределять пользователь, необязательно трогать
+    //@ts-expect-error
     protected componentDidUpdate(oldProps: BlockOwnProps, newProps: BlockOwnProps) {
         return true;//TODO: need debug deepEqual(oldProps, newProps);
     }
@@ -155,7 +162,9 @@ export abstract class Block<Props extends BlockProps> {
         this._addBlockEvents();
     }
 
-    protected render(): DocumentFragment;
+    protected render(): DocumentFragment {
+        return new DocumentFragment();
+    };
 
     public getContent(): HTMLElement | null  {
         return this.element;
@@ -197,7 +206,7 @@ export abstract class Block<Props extends BlockProps> {
         }
     }
 
-    protected compile(template: (props: BlockOwnProps) => string, props: BlockOwnProps) {
+    protected compile(template: TemplateDelegate, props: BlockOwnProps) {
         const propsAndPlugs: BlockOwnProps = {...this.splitPropsAndChildren(props).props};
 
         Object.entries(this.children).forEach(([name, child]: [string, Block<Props> | Block<Props>[]]) => {

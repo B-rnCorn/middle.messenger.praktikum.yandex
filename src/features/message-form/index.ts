@@ -1,5 +1,4 @@
 import {Block} from "~/app/core/Block";
-//@ts-expect-error template
 import template from "./ui/message-form.hbs";
 import {BlockEvents} from "~/app/core/types";
 import { submitHandler } from "~/app/core/SubmitHandler";
@@ -21,10 +20,7 @@ export class MessageForm extends Block<MessageFormProps> {
     submitHandler: typeof submitHandler;
 
     protected init() {
-        super.init();
-
-        this.submitHandler = submitHandler;
-        this.submitHandler.subscribe('MessageFormSubmitted', this.sendMessage, this);
+        submitHandler.subscribe('MessageFormSubmitted', this.sendMessage, this);
     }
 
     protected render(): DocumentFragment {

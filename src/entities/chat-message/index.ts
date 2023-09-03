@@ -1,5 +1,4 @@
 import {Block} from '~/app/core/Block';
-// @ts-expect-error
 import template from './ui/chat-message.hbs';
 
 export type ChatMessageProps = {

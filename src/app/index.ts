@@ -12,6 +12,8 @@ import {profileConfig} from "~/pages/profile/model/config";
 import {ProfileEdit} from "~/pages/profile-edit";
 import {profileEditConfig} from "~/pages/profile-edit/model/config";
 
+import "./index.scss";
+
 window.addEventListener('DOMContentLoaded', async () => {
     const router = Router.getInstance();
     router

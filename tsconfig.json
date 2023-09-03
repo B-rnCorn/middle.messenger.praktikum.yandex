@@ -1,16 +1,18 @@
 {
     "compilerOptions": {
-        "outDir": "dist",
-        "target": "es2022",
+        "outDir": "./dist/",
+        "target": "es2017",
         "declaration": false,
-        "module": "es2022",
+        "module": "ESNext",
         "moduleResolution": "Node",
         "noImplicitAny": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "allowSyntheticDefaultImports": true,
         "strictNullChecks": true,
+        "esModuleInterop": true,
         "baseUrl": ".",
+        "skipLibCheck": true,
         "sourceMap": true,
         "paths": {
             "~/app/*": ["./src/app/*"],
@@ -21,6 +23,12 @@
             "~/shared/*": [ "./src/shared/*" ],
             "~/images/*": ["./src/app/images/*"]
         },
-        "exclude": ["node_modules", "**/*.hbs"]
+        "lib": [
+            "ESNext",
+            "DOM"
+        ]
+    },
+    "ts-node": {
+        "files": true
     }
 }

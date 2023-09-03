@@ -1,5 +1,4 @@
 import {Block} from '~/app/core/Block';
-//@ts-expect-error template
 import template from './ui/chat-content.hbs';
 import {ChatMessage} from "~/entities/chat-message";
 import {MessageForm} from "~/features/message-form";
