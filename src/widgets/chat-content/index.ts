@@ -36,7 +36,7 @@ export class ChatContent extends Block<ChatContentProps> {
         const chat = store.getState().chats?.find(chat => chat.id === selectedChatId);
 
         if (selectedChatId && selectedChatMessages && selectedChatMessages[selectedChatId]) {
-            if (chat) this.blockProps.imageUrl = chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : 'https://icons8.com/icon/111473/person';
+            if (chat) this.blockProps.imageUrl = chat.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + chat.avatar : 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png';
             this.children.chatMessages = selectedChatMessages[selectedChatId].map(item =>
                 new ChatMessage({
                     blockPropsAndChildren: {

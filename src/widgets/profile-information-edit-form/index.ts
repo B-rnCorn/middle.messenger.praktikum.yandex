@@ -39,7 +39,7 @@ export class ProfileInformationEditForm extends Block<ProfileInformationEditForm
 
         if (userInfo) {
             //@ts-expect-error
-            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://icons8.com/icon/111473/person';
+            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png';
             //@ts-expect-error
             this.children.profileFormItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {

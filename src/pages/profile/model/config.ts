@@ -11,7 +11,7 @@ export const profileConfig: ProfilePageProps = {
         profileInformation: new ProfileInformation({
             blockPropsAndChildren: {
                 nameInChat: 'Имя в чате',
-                imageUrl: 'https://icons8.com/icon/111473/person',
+                imageUrl: 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png',
                 profileInfoItems: [],
                 profileInfoActions: [
                     new ProfileInfoAction({

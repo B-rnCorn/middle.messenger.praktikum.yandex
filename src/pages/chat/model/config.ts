@@ -26,7 +26,7 @@ export const chatConfig: ChatPageProps = {
             blockPropsAndChildren: {
                 search: new ChatSearch({
                     blockPropsAndChildren: {
-                        searchIconUrl: '',
+                        searchIconUrl: 'https://assets.stickpng.com/images/585e4ae1cb11b227491c3393.png',
                         addChatButton: new IconButton({
                             blockEvents: {
                                 click: function (): void {
@@ -34,7 +34,7 @@ export const chatConfig: ChatPageProps = {
                                 }
                             },
                             blockPropsAndChildren: {
-                                iconUrl: 'https://icons8.com/icon/1501/plus',
+                                iconUrl: 'https://png.pngtree.com/element_our/sm/20180516/sm_5afbe35ff3ec9.jpg',
                                 cssClassName: 'chat-search__plus-icon',
                                 altText: 'addChatIcon',
                             },
@@ -55,7 +55,7 @@ export const chatConfig: ChatPageProps = {
         }),
         activeChat: new ChatContent({
             blockPropsAndChildren: {
-                imageUrl: 'https://icons8.com/icon/111473/person',
+                imageUrl: 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png',
                 name: '',
                 chatMessages: [],
                 menuItems: [
@@ -146,7 +146,7 @@ export const chatConfig: ChatPageProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: '',
+                                    iconUrl: 'https://freepngimg.com/thumb/red_cross/28028-5-red-cross-clipart.png',
                                     altText: 'close_icon',
                                     cssClassName: 'create-chat-modal-window__close'
                                 }
@@ -201,7 +201,7 @@ export const chatConfig: ChatPageProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: '',
+                                    iconUrl: 'https://freepngimg.com/thumb/red_cross/28028-5-red-cross-clipart.png',
                                     altText: 'close_icon',
                                     cssClassName: 'edit-chat-members-modal__close'
                                 }

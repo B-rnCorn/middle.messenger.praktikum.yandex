@@ -33,7 +33,7 @@ export class ProfileInformation extends Block<ProfileInformationProps> {
 
         if (userInfo) {
 
-            this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://icons8.com/icon/111473/person';
+            this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png';
             //@ts-expect-error
             this.children.profileInfoItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {

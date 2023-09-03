@@ -28,7 +28,7 @@ export const profileEditConfig: ProfileEditProps = {
                         }
                     },
                     blockPropsAndChildren: {
-                        imageUrl: 'https://icons8.com/icon/111473/person',
+                        imageUrl: 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png',
                     }
                 }),
                 profileFormItems: [],
@@ -93,7 +93,7 @@ export const profileEditConfig: ProfileEditProps = {
                                     }
                                 },
                                 blockPropsAndChildren: {
-                                    iconUrl: 'https://icons8.com/icon/95834/multiply',
+                                    iconUrl: 'https://freepngimg.com/thumb/red_cross/28028-5-red-cross-clipart.png',
                                     altText: 'close_icon',
                                     cssClassName: 'load-file-modal-window__close'
                                 }
