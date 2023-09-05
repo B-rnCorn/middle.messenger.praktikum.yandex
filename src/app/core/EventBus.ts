@@ -1,5 +1,5 @@
 export default class EventBus {
-    private readonly listeners: Record<string, Array<() => void>>;
+    private readonly listeners: Record<string, Array<(...args: any) => void>>;
 
     constructor() {
         this.listeners = {};
@@ -24,12 +24,8 @@ export default class EventBus {
     }
 
     emit(event: string, ...args: unknown[]) {
-        /*if (!this.listeners[event]) {
-            throw new Error(`Нет события: ${event}`);
-        }*/
-
-        this.listeners[event].forEach(function (listener) {
-            listener(...args as []);
+        (this.listeners[event] || []).forEach((listener) => {
+            listener(...args);
         });
     }
 }

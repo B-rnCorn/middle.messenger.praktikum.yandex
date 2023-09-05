@@ -1,5 +1,4 @@
 import {Block} from "~/app/core/Block";
-// @ts-expect-error
 import template from "./button.hbs";
 import {BlockEvents} from "~/app/core/types";
 import {AltNav} from "~/shared/button/alt-nav";

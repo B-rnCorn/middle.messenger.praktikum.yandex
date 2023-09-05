@@ -7,13 +7,12 @@ import {BlockEvents} from "~/app/core/types";
 import store from "~/app/core/store/Store";
 import {LOCALIZED_FIELD_NAMES, USER_FIELDS_NAMES, INTERNAL_FIELD_NAMES} from "./constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
-import {Input} from "~/shared/input-field/input";
+import {Input} from "~/shared/controlled-input";
 import {REGULAR_EXPRESSION_PATTERNS, REGULAR_EXPRESSION_VALIDATION_TEXT} from "~/shared/constants";
 import {isValid} from "~/shared/helpers/validate-helpers";
 import authController from "~/app/core/controllers/AuthController";
 import {ChangeUserProfileRequestData} from "~/app/core/api/AuthAPI";
 import {ImgLoadIcon} from "~/shared/img-load-icon";
-import * as images from "~/images/image-urls";
 
 export type ProfileInformationEditFormProps = {
     blockEvents?: BlockEvents
@@ -40,7 +39,7 @@ export class ProfileInformationEditForm extends Block<ProfileInformationEditForm
 
         if (userInfo) {
             //@ts-expect-error
-            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : images.chatImageUrl.toString();
+            this.children.imageLoadIcon.blockProps.imageUrl = this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png';
             //@ts-expect-error
             this.children.profileFormItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {

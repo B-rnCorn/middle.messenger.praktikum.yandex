@@ -60,7 +60,7 @@ export default class WS extends EventBus {
     }
 
     private setupPing() {
-        this.pingInterval = setInterval(() => {
+        this.pingInterval = window.setInterval(() => {
             this.send({type: "ping" });
         }, 5000);
 

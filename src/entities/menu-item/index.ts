@@ -1,5 +1,4 @@
 import {Block} from '~/app/core/Block';
-// @ts-expect-error
 import template from './ui/menu-item.hbs';
 import {BlockEvents} from "~/app/core/types";
 

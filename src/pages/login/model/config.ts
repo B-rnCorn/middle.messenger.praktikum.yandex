@@ -2,7 +2,7 @@ import {Card} from "~/shared/card";
 import LoginForm from "~/widgets/login-form";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
-import {Input} from "~/shared/input-field/input";
+import {Input} from "~/shared/controlled-input";
 import {REGULAR_EXPRESSION_PATTERNS, REGULAR_EXPRESSION_VALIDATION_TEXT} from "~/shared/constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
 import {LoginPageProps} from "~/pages/login";

@@ -1,10 +1,7 @@
 import {Block} from '~/app/core/Block';
-// @ts-expect-error
 import template from './ui/profile.hbs';
 import {NavigateBack} from "~/features/navigate-back";
 import {ProfileInformation} from "~/widgets/profile-information";
-import withControllers from "~/app/core/providers/withControllers";
-import AuthController from "~/app/core/controllers/AuthController";
 
 export type ProfilePageProps = {
     blockPropsAndChildren: {
@@ -19,4 +16,4 @@ class ProfilePage extends Block<ProfilePageProps> {
     }
 }
 
-export default withControllers(ProfilePage, {auth: AuthController});
+export default ProfilePage;

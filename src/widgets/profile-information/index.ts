@@ -6,7 +6,6 @@ import {ProfileInfoAction} from "~/entities/profile-info-action";
 import store from "~/app/core/store/Store";
 import {LOCALIZED_FIELD_NAMES, USER_FIELDS_NAMES} from "~/widgets/profile-information/constants";
 import {submitHandler} from "~/app/core/SubmitHandler";
-import * as images from "~/images/image-urls";
 
 export type ProfileInformationProps = {
     blockPropsAndChildren: {
@@ -34,7 +33,7 @@ export class ProfileInformation extends Block<ProfileInformationProps> {
 
         if (userInfo) {
 
-            this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : images.chatImageUrl.toString();
+            this.blockProps.imageUrl = userInfo.avatar ? 'https://ya-praktikum.tech/api/v2/resources' + userInfo.avatar : 'https://cdn-icons-png.flaticon.com/512/2815/2815428.png';
             //@ts-expect-error
             this.children.profileInfoItems =  Object.keys(userInfo).map((userDataKey) => {
                 if (USER_FIELDS_NAMES.includes(userDataKey)) {

@@ -1,14 +1,12 @@
 import {Block} from "~/app/core/Block";
 import {submitHandler} from "~/app/core/SubmitHandler";
-//@ts-expect-error
 import template from "./ui/login-form.hbs";
 import {isValid} from "~/shared/helpers/validate-helpers";
 import {BlockEvents} from "~/app/core/types";
 import {InputField} from "~/shared/input-field";
 import {Button} from "~/shared/button";
-import AuthController from "~/app/core/controllers/AuthController";
+import authController from "~/app/core/controllers/AuthController";
 import {SigninData} from "~/app/core/api/AuthAPI";
-import withControllers from "~/app/core/providers/withControllers";
 
 export type LoginFormProps = {
     blockEvents: BlockEvents
@@ -20,13 +18,8 @@ export type LoginFormProps = {
 
 class LoginForm extends Block<LoginFormProps> {
 
-    submitHandler: typeof submitHandler;
-
     protected init() {
-        super.init();
-
-        this.submitHandler = submitHandler;
-        this.submitHandler.subscribe('LoginFormSubmitted', this.sendForm, this);
+        submitHandler.subscribe('LoginFormSubmitted', this.sendForm, this);
     }
 
     protected render(): DocumentFragment {
@@ -46,9 +39,9 @@ class LoginForm extends Block<LoginFormProps> {
             const values = this.children.loginFormItems.map((item) => [(item as InputField).getName(), (item as InputField).getValue()]);
             const data = Object.fromEntries(values) as SigninData;
 
-            this.blockProps.controllers.auth.signin(data);
+            authController.signin(data);
         }
     }
 }
 
-export default withControllers(LoginForm, {auth: AuthController});
+export default LoginForm;
